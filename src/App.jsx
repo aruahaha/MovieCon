@@ -19,10 +19,6 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 export default function App() {
   return (
-<<<<<<< HEAD
-    <h1>Hello</h1>
-=======
     <RouterProvider router={router} />
->>>>>>> development
   )
 }
