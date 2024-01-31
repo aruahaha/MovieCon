@@ -1,0 +1,185 @@
+.main-home-div {
+    position: relative;
+    height: 100vh;
+    /* Adjust the height as needed */
+}
+
+.home-img-container {
+    position: relative;
+}
+
+.home-img {
+    width: 100%;
+    filter: brightness(0.6);
+}
+
+.home-text-container {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    /* Adjust the text color as needed */
+}
+
+.scrolling-words-container {
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    align-items: center;
+    transition: 1s ease;
+    font-size: 5rem;
+    /* Updated to 5rem */
+    font-weight: 900;
+}
+
+.scrolling-words-box {
+    height: 5rem;
+    /* Updated to 5rem */
+    overflow: hidden;
+
+    ul {
+        margin: 0 0.625rem;
+        padding: 0;
+        transition: transform 1s ease-in-out;
+        animation: scrollUp 4s infinite;
+        list-style: none;
+
+        li {
+            display: flex;
+            align-items: center;
+            height: 5rem;
+            /* Updated to 5rem */
+        }
+    }
+}
+
+.search-bar {
+    width: 100%;
+    padding: 15px;
+    border-radius: 20px;
+    border: 2px solid #DB4A2B;
+}
+
+.search-bar-div {
+    position: relative;
+    height: 100px;
+}
+
+.search-bar-btn {
+    height: 45%;
+    position: absolute;
+    right: 0;
+    top: 2px;
+    border: none;
+    background-color: #DB4A2B;
+    padding-inline: 12px;
+    border-radius: 20px;
+}
+
+@keyframes scrollUp {
+    0% {
+        transform: translateY(0);
+    }
+
+    10% {
+        transform: translateY(0%);
+    }
+
+    20% {
+        transform: translateY(0%);
+    }
+
+    30% {
+        transform: translateY(0%);
+    }
+
+    40% {
+        transform: translateY(-33%);
+        /* Updated to -50% for better centering */
+    }
+
+    50% {
+        transform: translateY(-33%);
+        /* Updated to -50% for better centering */
+    }
+
+    60% {
+        transform: translateY(-33%);
+        /* Updated to -50% for better centering */
+    }
+
+    70% {
+        transform: translateY(-67%);
+        /* Updated to -100% for better centering */
+    }
+
+    80% {
+        transform: translateY(-67%);
+        /* Updated to -100% for better centering */
+    }
+
+    90% {
+        transform: translateY(-67%);
+        /* Updated to -100% for better centering */
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1700px) {
+    .scrolling-words-container {
+        font-size: 4rem;
+    }
+
+    .scrolling-words-box {
+        height: 4rem;
+
+        ul {
+            li {
+                height: 4rem;
+                /* Updated to 5rem */
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .scrolling-words-container {
+        font-size: 2rem;
+    }
+
+    .scrolling-words-box {
+        height: 3rem;
+
+        ul {
+            li {
+                height: 3rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .scrolling-words-container {
+        font-size: 40px;
+        display: block;
+    }
+
+    .scrolling-words-box {
+        height: 4rem;
+        ul {
+            li {
+                display: block;
+                height: 4rem;
+            }
+        }
+    }
+
+    .home-text-container {
+        top: 50%;
+    }
+    
+}
