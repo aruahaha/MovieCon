@@ -5,7 +5,7 @@ export async function getPopularMovies(page) {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${import.meta.env.VITE_AUTHORIZATION_KEY}`
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzM5ZjNjOWY0ZTg1NTM2MjRmZjNmN2YzOWE0M2Q4ZiIsInN1YiI6IjY1YjhkNWFmNDZlNzVmMDE4M2JiNmJiOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eALEQTXSdrHEG8WbyhGz2oegp9QQMUkrPnvLCFO50Ug`
         }
     };
 
