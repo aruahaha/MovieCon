@@ -24,18 +24,16 @@
 }
 
 .scrolling-words-container {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Oswald', sans-serif !important;
     display: flex;
     align-items: center;
     transition: 1s ease;
-    font-size: 5rem;
-    /* Updated to 5rem */
+    font-size: 7rem;
     font-weight: 900;
 }
 
 .scrolling-words-box {
-    height: 5rem;
-    /* Updated to 5rem */
+    height: 7rem;
     overflow: hidden;
 
     ul {
@@ -48,34 +46,12 @@
         li {
             display: flex;
             align-items: center;
-            height: 5rem;
-            /* Updated to 5rem */
+            height: 7rem;
+
         }
     }
 }
 
-.search-bar {
-    width: 100%;
-    padding: 15px;
-    border-radius: 20px;
-    border: 2px solid #DB4A2B;
-}
-
-.search-bar-div {
-    position: relative;
-    height: 100px;
-}
-
-.search-bar-btn {
-    height: 45%;
-    position: absolute;
-    right: 0;
-    top: 2px;
-    border: none;
-    background-color: #DB4A2B;
-    padding-inline: 12px;
-    border-radius: 20px;
-}
 
 @keyframes scrollUp {
     0% {

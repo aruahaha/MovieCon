@@ -4,12 +4,14 @@ import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } 
 import "./App.css"
 
 import Layout from "./Component/Layout";
-import Home from "./Pages/Home";
+import Home, {loader as HomePageLoader} from "./Pages/Home";
+
+
 
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout />}>
-      <Route index element={<Home />} />
+      <Route index element={<Home />} loader={HomePageLoader} />
   </Route>
 
 ))

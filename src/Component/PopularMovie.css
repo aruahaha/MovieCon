@@ -1,0 +1,17 @@
+.popular-movie-img-div{
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    gap: 2rem;
+    justify-content: center;
+}
+
+/* .popular-movie-img-div::-webkit-scrollbar{
+    display: none;
+} */
+
+.popular-movie-image{
+    width: 10%;
+    border-radius: 5px;
+}
