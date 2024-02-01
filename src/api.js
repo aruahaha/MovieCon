@@ -1,6 +1,4 @@
 import React from "react";
-import axios from "axios"
-
 export async function getPopularMovies(page) {
     const url = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`;
     const options = {
@@ -58,28 +56,4 @@ export function getDataBySearch() {
         .then(json => console.log(json))
         .catch(err => console.error('error:' + err));
 
-}
-
-
-const options = {
-    method: 'GET',
-    url: 'https://translated-mymemory---translation-memory.p.rapidapi.com/get',
-    params: {
-        langpair: 'en|it',
-        q: 'Hello World!',
-        mt: '1',
-        onlyprivate: '0',
-        de: 'a@b.c'
-    },
-    headers: {
-        'X-RapidAPI-Key': '1b4dced35cmsh8273578f4da5fd6p17ebc1jsn07f560ce806f',
-        'X-RapidAPI-Host': 'translated-mymemory---translation-memory.p.rapidapi.com'
-    }
-};
-
-try {
-    const response = await axios.request(options);
-    console.log(response.data);
-} catch (error) {
-    console.error(error);
 }
