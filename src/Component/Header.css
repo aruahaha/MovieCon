@@ -7,6 +7,7 @@
     padding: 0 38px;
     z-index: 9999;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.11);
+    background-color: #0F0F0F;
 }
 
 .pc-header>.brand-name {
@@ -35,25 +36,67 @@
     height: inherit;
     align-items: center;
     text-decoration: none;
-    color: #2C3333;
+    color: white;
     font-weight: 500;
     text-transform: uppercase;
     transition: 0.3s ease;
 }
-
-
 
 .mob-header,
 .mob-header-menu {
     display: none;
 }
 
+.search-bar{
+    width: 0;
+}
+
 .brand-name{
-    font-family: 'Anton', sans-serif;
+    font-family: 'Passion One', sans-serif;
     font-size: 40px;
-    color: #DB4A2B;
+    color: #40A2D8;
     text-decoration: none;
 }
+
+.search-bar-div{
+    display: flex;
+    margin-right: 20px;
+}
+
+.search-div{
+    visibility: hidden;
+    width: 0;
+}
+
+
+.cross-btn-active{
+    border: none;
+    background-color: white;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.search-bar-active{
+    display: flex;
+    width: 250px;
+    visibility: visible;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    padding-block: 18px;
+    transition: width 0.3s ease-in;
+}
+
+.symbol-btn{
+    display: none;
+}
+
+.symbol-btn-active{
+    border: none;
+    background: transparent;
+}
+
+
 
 
 @media (max-width: 768px) {
@@ -67,8 +110,9 @@
         align-items: center;
         justify-content: space-between;
         padding: 0 38px;
-        position: relative; /* Add this line */
-        z-index: 1000; /* Set a higher z-index value */
+        position: relative; 
+        z-index: 1000;
+        background-color: #0F0F0F;
     }
 
     .mob-header-menu {
@@ -79,19 +123,19 @@
         align-items: center;
         text-align: center;
         transition: max-height 0.3s ease;
-        position: absolute; /* Add this line */
-        top: 91px; /* Adjust the top position as needed */
-        left: 0; /* Adjust the left position as needed */
+        position: absolute; 
+        top: 91px;
+        left: 0; 
         width: 100%; /* Make it full width */
-        background-color: #DB4A2B;
+        background-color: #0F0F0F;
         /* border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px; */
-        z-index: 998; /* Set a lower z-index value initially */
+        z-index: 998; 
     }
 
     .active-menu {
         max-height: 250px;
-        transition: max-height 0.3s ease; /* Add this line for a smooth transition */
+        transition: max-height 0.3s ease; 
         z-index: 999;
     }
 
@@ -106,7 +150,7 @@
 
     .mob-header-menu>ul>li>a {
         text-decoration: none;
-        color: #ffffff;
+        color: #40A2D8;
         font-size: 20px;
         font-family: 'Oswald', sans-serif;
     }

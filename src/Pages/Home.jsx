@@ -1,16 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, createContext, useEffect, useState } from "react";
 import "./Home.css"
 import myImage from "/images/pxfuel2.jpg"
 import myPhoneImage from "/images/pxfuel2phone.jpg"
 import { useMediaQuery } from 'react-responsive';
 import SearchIcon from '@mui/icons-material/Search';
+import { getPopularMovies } from "../api";
+import { Await, defer, useLoaderData } from "react-router";
+
+
+
+import PopularMovie from "../Component/PopularMovie"
+import HomeCarousel from "../Component/HomeCarousel";
+
+export async function loader() {
+    return defer({ popularMovies: getPopularMovies(1) });
+}
+
 
 const pcHomeImages = [myImage]
 const phoneHomeImages = [myPhoneImage]
 
 export default function Home() {
+
+
     const [pcImage, setPcImage] = useState([])
     const screen = useMediaQuery({ query: `(max-width:800px)` })
+
+    const popularMovies = useLoaderData()
 
     useEffect(() => {
 
@@ -19,13 +35,13 @@ export default function Home() {
         } else {
             setPcImage(pcHomeImages);
         }
+
     }, [screen])
 
     return (
         <div className="main-home-div">
-            <div className="home-search-img-div">
+            {/* <div className="home-search-img-div">
                 <div className="home-img-container">
-                    {/* <img src={myImage} className="home-img" alt="Home Image" /> */}
                     {pcImage && pcImage.map((image, i) => (
                         <img
                             src={image}
@@ -35,7 +51,7 @@ export default function Home() {
                     ))}
                     <div className="home-text-container">
                         <div className="scrolling-words-container">
-                            <span >SEARCH ANY</span>
+                            <span>SEARCH ANY</span>
                             <div className="scrolling-words-box">
                                 <ul>
                                     <li style={{ color: "orange" }}>MOVIE</li>
@@ -44,12 +60,22 @@ export default function Home() {
                                 </ul>
                             </div>
                         </div>
-                        <div className="search-bar-div">
-                            <input type="search" placeholder="Search" className="search-bar" />
-                            <button className="search-bar-btn"><SearchIcon /></button>
-                        </div>
                     </div>
                 </div>
+            </div> */}
+
+            <div>
+                <Suspense fallback={<h1>Loading...</h1>}>
+                    <Await resolve={popularMovies.popularMovies}>
+                        {(popularMovies) => (
+                            <>
+                                <HomeCarousel data={popularMovies.results}/>
+                                {/* <h1>Popular Movies</h1>
+                                <PopularMovie data={popularMovies.results} /> */}
+                            </>
+                        )}
+                    </Await>
+                </Suspense>
             </div>
         </div>
     )
