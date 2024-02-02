@@ -1,17 +1,115 @@
-.popular-movie-img-div{
+.main-scroller-div{
     display: flex;
-    flex-wrap: nowrap;
-    overflow-y: hidden;
-    overflow-x: scroll;
-    gap: 2rem;
-    justify-content: center;
+    padding-bottom: 50px;
 }
 
-/* .popular-movie-img-div::-webkit-scrollbar{
+.popular-movie-div{
+    display: grid;
+    grid-auto-flow: column;
+    height: auto;
+    overflow-y: auto;
+    overflow-x: scroll;
+    padding-block: 2rem;
+    gap: 1rem;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    width: 91%;
+    margin: 0 auto;
+
+}
+
+.popular-movie-div::-webkit-scrollbar{
     display: none;
-} */
+}
 
 .popular-movie-image{
-    width: 10%;
-    border-radius: 5px;
+    scroll-snap-align: center;
+    width: 180px;
+    border-radius: 10px;
+    transition: 0.2s ease;
+}
+
+.scroller-img-text-div{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    transition: 0.2s ease;
+}
+
+.scroller-movie-title{
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 20px;
+    position: absolute;
+    top: 60%;
+    color: white;
+    font-weight: 900;
+    text-align: center;
+    visibility: hidden;
+}
+
+.watchlist-btn{
+    position: absolute;
+    right: 0;
+    border: none;
+    background: transparent;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    visibility: hidden;
+}
+
+.scroller-percentage{
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    font-family: 'Outfit', sans-serif !important;
+    background-color: black;
+    border-radius: 60px;
+    margin: 0;
+    font-weight: 600;
+    color: white;
+    font-size: 13px;
+    width: 50px;
+}
+
+.CircularProgressbar-text {
+    font-size: 25px !important;
+}
+
+.scroller-img-text-div:hover .watchlist-btn{
+    visibility: visible;
+}
+
+.scroller-img-text-div:hover{
+    transform: scale(1.1);
+}
+
+.scroller-img-text-div:hover .popular-movie-image{
+    filter: blur(1px) brightness(0.5);
+}
+
+.scroller-img-text-div:hover .scroller-movie-title{
+    visibility: visible;
+}
+
+
+.scroller-btn {
+    border: none;
+    background: rgba(255, 255, 255, 0.5) !important;
+    margin-inline: 20px;
+}
+
+
+@media (max-width: 850px){
+
+    .popular-movie-image{
+        width: 200px;
+    }
+
+    .scroller-btn{
+        padding-inline: 5px;
+        margin: 0;
+    }
+
 }

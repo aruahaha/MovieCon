@@ -4,16 +4,20 @@ import myImage from "/images/pxfuel2.jpg"
 import myPhoneImage from "/images/pxfuel2phone.jpg"
 import { useMediaQuery } from 'react-responsive';
 import SearchIcon from '@mui/icons-material/Search';
-import { getPopularMovies } from "../api";
+import { getPopularMovies, getTrendingMovies } from "../api";
 import { Await, defer, useLoaderData } from "react-router";
 
 
 
 import PopularMovie from "../Component/PopularMovie"
 import HomeCarousel from "../Component/HomeCarousel";
+import { Link } from "react-router-dom";
 
 export async function loader() {
-    return defer({ popularMovies: getPopularMovies(1) });
+    return defer({
+        trendingMovies: getTrendingMovies(),
+        popularMovies: getPopularMovies(1)
+    });
 }
 
 
@@ -27,6 +31,7 @@ export default function Home() {
     const screen = useMediaQuery({ query: `(max-width:800px)` })
 
     const popularMovies = useLoaderData()
+    const trendingMovies = useLoaderData()
 
     useEffect(() => {
 
@@ -66,12 +71,23 @@ export default function Home() {
 
             <div>
                 <Suspense fallback={<h1>Loading...</h1>}>
+                    <Await resolve={trendingMovies.trendingMovies}>
+                        {(trendingMovies) => (
+                            <>
+                                <HomeCarousel data={trendingMovies.results} />
+                            </>
+                        )}
+                    </Await>
+                </Suspense>
+                <Suspense fallback={<h1>Loading...</h1>}>
                     <Await resolve={popularMovies.popularMovies}>
                         {(popularMovies) => (
                             <>
-                                <HomeCarousel data={popularMovies.results}/>
-                                {/* <h1>Popular Movies</h1>
-                                <PopularMovie data={popularMovies.results} /> */}
+                                <div className="popular-title-div">
+                                    <h1 className="popualr-movie-title">Popular Movies</h1>
+                                    <Link className="popular-more">More...</Link>
+                                </div>
+                                <PopularMovie data={popularMovies.results} />
                             </>
                         )}
                     </Await>
