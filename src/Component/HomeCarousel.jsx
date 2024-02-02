@@ -10,7 +10,7 @@ export default function HomeCarousel(props) {
     return (
         <div className="home-page-movie-carousel">
             <div>
-                <Carousel interval={null}>
+                <Carousel interval={3000}>
                     {props.data.map((movie) => (
                         <Carousel.Item>
                             <div className='main-carousel-div'>
