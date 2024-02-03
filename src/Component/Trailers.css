@@ -16,3 +16,24 @@
     font-weight: 900;
     margin: 0;
 }
+
+.trailer-name-video{
+    display: flex;
+    padding-inline: 20px;
+    gap: 2rem;
+}
+
+.youtube-trailer{
+    width: 650px;
+    height: 400px;
+    border-radius: 10px;
+}
+
+@media (max-width: 850px){
+
+    .trailer-title-div{
+        margin: 0;
+        justify-content: center;
+    }
+
+}
