@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Trailers.css"
-import YouTube from 'react-youtube'
 
 export default function Trailers(props) {
     return (
