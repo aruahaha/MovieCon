@@ -108,3 +108,30 @@ export function getDataBySearch() {
         .catch(err => console.error('error:' + err));
 
 }
+
+export async function getTrailers(id) {
+    const url = `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzM5ZjNjOWY0ZTg1NTM2MjRmZjNmN2YzOWE0M2Q4ZiIsInN1YiI6IjY1YjhkNWFmNDZlNzVmMDE4M2JiNmJiOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eALEQTXSdrHEG8WbyhGz2oegp9QQMUkrPnvLCFO50Ug'
+        }
+    };
+
+    try {
+        const response = await fetch(url, options);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch trailers. HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const trailers = data.results.filter(video => video.type === 'Trailer');
+        return trailers;
+    } catch (error) {
+        throw new Error(`Error in getTrailers: ${error.message}`);
+    }
+}
+
+

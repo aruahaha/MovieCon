@@ -25,9 +25,10 @@ export default function PopularMovie(props) {
                         <Link key={movie.id} to={`/movie/${movie.id}`}>
                             <div className="scroller-img-text-div">
                                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="popular-movie-image" alt={movie.title} />
-                                <h1 className='scroller-movie-title'>
+                                {/* <h1 className='scroller-movie-title'>
                                     {movie.original_language.toLowerCase() === 'en' ? movie.original_title : movie.title}
-                                </h1>
+                                </h1> */}
+                                <span className='scroller-movie-btn'>View More</span>
                                 <button className="watchlist-btn"><BookmarkBorderIcon /></button>
                                 <div className='scroller-percentage'>
                                     <CircularProgressbar

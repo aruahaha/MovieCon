@@ -78,9 +78,13 @@
 .carousel-titles {
     font-family: 'Outfit', sans-serif !important;
     font-weight: 900;
-    color: white;
+    color: #40A2D8;
     margin: 0;
-    font-size: clamp(40px, 2vw, 30px);
+    font-size: clamp(35px, 2vw, 20px);
+}
+
+.movie-title{
+    color: white !important;
 }
 
 .date-overview-title {
@@ -101,6 +105,9 @@
     .carousel-poster-image {
         width: 25%;
         max-width: 100%;
+    }
+    .carousel-titles{
+        width: 50%;
     }
 }
 

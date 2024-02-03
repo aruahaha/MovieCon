@@ -10,9 +10,9 @@ export default function HomeCarousel(props) {
     return (
         <div className="home-page-movie-carousel">
             <div>
-                <Carousel interval={3000}>
+                <Carousel interval={null}>
                     {props.data.map((movie) => (
-                        <Carousel.Item>
+                        <Carousel.Item key={movie.id}>
                             <div className='main-carousel-div'>
                                 <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} className="carousel-bg-img" />
                                 <div className='overlay-div'>
@@ -33,7 +33,7 @@ export default function HomeCarousel(props) {
                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="carousel-poster-image" />
                                     <div className='title-overview-div'>
                                         <div className='title-percentage-div'>
-                                            <h1 className='carousel-titles'>
+                                            <h1 className='carousel-titles movie-title'>
                                                 {movie.original_language.toLowerCase() === 'en' ? movie.original_title || movie.original_name : movie.title}
                                             </h1>
                                             <div className='carousel-percentage'>
