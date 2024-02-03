@@ -1,6 +1,7 @@
 .main-scroller-div{
     display: flex;
     margin-bottom: 30px;
+    position: relative;
 }
 
 .popular-movie-div{
@@ -14,7 +15,7 @@
     scroll-behavior: smooth;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
-    width: 91%;
+    width: 100%;
     margin: 0 auto;
 
 }
@@ -94,11 +95,21 @@
     visibility: visible;
 }
 
-
-.scroller-btn {
+.scroller-btn{
     border: none;
-    background: rgba(255, 255, 255, 0.5) !important;
+    background: transparent !important;
     margin-inline: 20px;
+    position: absolute;
+    top: 45%;
+    z-index: 999;
+}
+
+.scroller-btn-left {
+    left: 0;
+}
+
+.scroller-btn-right {
+    right: 0;
 }
 
 

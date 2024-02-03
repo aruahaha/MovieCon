@@ -5,29 +5,66 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 import "./HomeCarousel.css"
+import { Link } from 'react-router-dom';
+
+const stylesAboveSeventy = {
+    textColor: "#fff",
+    pathColor: "greenyellow",
+    trailColor: "grey"
+}
+const stylesAboveForty = {
+    textColor: "#fff",
+    pathColor: "yellow",
+    trailColor: "grey"
+}
+const stylesRemaining = {
+    textColor: "#fff",
+    pathColor: "red",
+    trailColor: "grey"
+}
 
 export default function HomeCarousel(props) {
     return (
         <div className="home-page-movie-carousel">
             <div>
-                <Carousel interval={null}>
+                <Carousel interval={3000}>
                     {props.data.map((movie) => (
                         <Carousel.Item key={movie.id}>
                             <div className='main-carousel-div'>
                                 <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} className="carousel-bg-img" />
                                 <div className='overlay-div'>
                                     <div className='phone-carousel-percentage-div'>
-                                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="phone-carousel-poster-image" />
+                                        <Link to={`/movie/${movie.id}`}>
+                                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="phone-carousel-poster-image" />
+                                        </Link>
                                         <div className='phone-carousel-percentage'>
-                                            <CircularProgressbar
-                                                value={Math.ceil(movie.vote_average * 10)}
-                                                text={`${Math.ceil(movie.vote_average * 10)}%`}
-                                                styles={buildStyles({
-                                                    textColor: '#fff',
-                                                    pathColor: 'greenyellow',
-                                                    trailColor: 'grey',
-                                                })}
-                                            />
+                                            {Math.ceil(movie.vote_average * 10) >= 70 ?
+                                                <CircularProgressbar
+                                                    value={Math.ceil(movie.vote_average * 10)}
+                                                    text={`${Math.ceil(movie.vote_average * 10)}%`}
+                                                    styles={buildStyles(
+                                                        stylesAboveSeventy
+                                                    )}
+                                                />
+                                                :
+                                                Math.ceil(movie.vote_average * 10) >= 40
+                                                    ?
+                                                    <CircularProgressbar
+                                                        value={Math.ceil(movie.vote_average * 10)}
+                                                        text={`${Math.ceil(movie.vote_average * 10)}%`}
+                                                        styles={buildStyles(
+                                                            stylesAboveForty
+                                                        )}
+                                                    />
+                                                    :
+                                                    <CircularProgressbar
+                                                        value={Math.ceil(movie.vote_average * 10)}
+                                                        text={`${Math.ceil(movie.vote_average * 10)}%`}
+                                                        styles={buildStyles(
+                                                            stylesRemaining
+                                                        )}
+                                                    />
+                                            }
                                         </div>
                                     </div>
                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="carousel-poster-image" />
@@ -36,16 +73,35 @@ export default function HomeCarousel(props) {
                                             <h1 className='carousel-titles movie-title'>
                                                 {movie.original_language.toLowerCase() === 'en' ? movie.original_title || movie.original_name : movie.title}
                                             </h1>
+                                            {/* <Link to={`/movie/${movie.id}`} className='phone-carousel-more-btn'>More..</Link> */}
                                             <div className='carousel-percentage'>
-                                                <CircularProgressbar
-                                                    value={Math.ceil(movie.vote_average * 10)}
-                                                    text={`${Math.ceil(movie.vote_average * 10)}%`}
-                                                    styles={buildStyles({
-                                                        textColor: '#fff',
-                                                        pathColor: 'greenyellow',
-                                                        trailColor: 'grey',
-                                                    })}
-                                                />
+                                                {Math.ceil(movie.vote_average * 10) >= 70 ?
+                                                    <CircularProgressbar
+                                                        value={Math.ceil(movie.vote_average * 10)}
+                                                        text={`${Math.ceil(movie.vote_average * 10)}%`}
+                                                        styles={buildStyles(
+                                                            stylesAboveSeventy
+                                                        )}
+                                                    />
+                                                    :
+                                                    Math.ceil(movie.vote_average * 10) >= 40
+                                                        ?
+                                                        <CircularProgressbar
+                                                            value={Math.ceil(movie.vote_average * 10)}
+                                                            text={`${Math.ceil(movie.vote_average * 10)}%`}
+                                                            styles={buildStyles(
+                                                                stylesAboveForty
+                                                            )}
+                                                        />
+                                                        :
+                                                        <CircularProgressbar
+                                                            value={Math.ceil(movie.vote_average * 10)}
+                                                            text={`${Math.ceil(movie.vote_average * 10)}%`}
+                                                            styles={buildStyles(
+                                                                stylesRemaining
+                                                            )}
+                                                        />
+                                                }
                                             </div>
                                         </div>
                                         <div className='date-overview'>
@@ -62,6 +118,7 @@ export default function HomeCarousel(props) {
                                                 <p className='carousel-movie-overview'>{movie.overview}</p>
                                             </div>
                                         </div>
+                                        <Link to={`/movie/${movie.id}`} className='carousel-more-btn'>More..</Link>
                                     </div>
                                 </div>
                             </div>

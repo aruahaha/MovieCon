@@ -56,8 +56,6 @@ export default function Home() {
                             </>
                         )}
                     </Await>
-                </Suspense>
-                <Suspense fallback={<h1>Loading...</h1>}>
                     <Await resolve={popularMovies.popularMovies}>
                         {(popularMovies) => (
                             <>
@@ -69,17 +67,14 @@ export default function Home() {
                             </>
                         )}
                     </Await>
-                </Suspense>
-                {/* <Suspense fallback={<h1>Loading...</h1>}>
-                    <Await resolve={trailers.trailers}>
+                    {/* <Await resolve={trailers.trailers}>
                         {(trailers) => (
                             <>
                                 <Trailers data={trailers} />
                             </>
                         )}
-                    </Await>
-                </Suspense> */}
-
+                    </Await> */}
+                </Suspense>
             </div>
         </div>
     )

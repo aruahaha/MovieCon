@@ -83,7 +83,7 @@
     font-size: clamp(35px, 2vw, 20px);
 }
 
-.movie-title{
+.movie-title {
     color: white !important;
 }
 
@@ -97,6 +97,56 @@
     color: white;
 }
 
+.carousel-more-btn {
+    font-family: 'Outfit', sans-serif !important;
+    border: none;
+    background-color: #40A2D8;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #40A2D8;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #40A2D8;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100px;
+    will-change: transform;
+}
+
+.carousel-more-btn:disabled {
+    pointer-events: none;
+}
+
+.carousel-more-btn:hover {
+    color: #fff;
+    background-color: #40A2D8;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+}
+
+.carousel-more-btn:active {
+    box-shadow: none;
+    transform: translateY(0);
+}
+
+.phone-carousel-more-btn {
+    display: none;
+}
+
 @media (max-width: 1450px) {
     .overlay-div {
         margin-left: 100px;
@@ -106,8 +156,9 @@
         width: 25%;
         max-width: 100%;
     }
-    .carousel-titles{
-        width: 50%;
+
+    .carousel-titles {
+        width: 80%;
     }
 }
 
@@ -138,6 +189,7 @@
         margin: 0;
         flex-direction: column;
         align-items: center;
+        top: 48%;
     }
 
     .carousel-bg-img {
@@ -192,4 +244,22 @@
     .date-overview {
         display: none;
     }
+
+    .phone-carousel-more-btn {
+        font-family: 'Outfit', sans-serif !important;
+        border: none;
+        background-color: #40A2D8;
+        padding-inline: 20px;
+        padding-block: 10px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: white;
+        text-align: center;
+        display: block;
+    }
+
+    .carousel-more-btn {
+        display: none;
+    }
+    
 }
