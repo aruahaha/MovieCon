@@ -1,18 +1,15 @@
-import React, { Suspense, createContext, useEffect, useState } from "react";
-import "./Home.css"
-import myImage from "/images/pxfuel2.jpg"
-import myPhoneImage from "/images/pxfuel2phone.jpg"
+import React, { Suspense, useEffect, useState } from "react";
 import { useMediaQuery } from 'react-responsive';
-import SearchIcon from '@mui/icons-material/Search';
-import { getPopularMovies, getTrendingMovies, getTrailers } from "../api";
 import { Await, defer, useLoaderData } from "react-router";
+import { getPopularMovies, getTrailers, getTrendingMovies } from "../api";
+import "./Home.css";
+import myImage from "/images/pxfuel2.jpg";
+import myPhoneImage from "/images/pxfuel2phone.jpg";
 
-import PopularMovie from "../Component/PopularMovie"
 import HomeCarousel from "../Component/HomeCarousel";
-import Trailers from "../Component/Trailers";
+import PopularMovie from "../Component/PopularMovie";
 
 import { Link } from "react-router-dom";
-import YouTube from "react-youtube";
 
 export async function loader() {
     return defer({
