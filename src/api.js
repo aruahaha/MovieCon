@@ -1,7 +1,6 @@
 import React from "react";
 export async function getPopularMovies(page) {
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${import.meta.env.VITE_API_KEY}&page=${page}`;
-
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -49,9 +48,9 @@ export async function getTrendingMovies() {
 }
 
 
-export async function getMovieById() {
+export async function getMovieById(id) {
 
-    const url = `https://api.themoviedb.org/3/movie/1927?language=en-US&api_key=${import.meta.env.VITE_API_KEY}`;
+    const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US&api_key=${import.meta.env.VITE_API_KEY}`;
 
     try {
         const response = await fetch(url);
@@ -78,10 +77,10 @@ export async function getTrailers(id) {
         }
 
         const data = await response.json();
-        const trailers = data.results.filter(video => video.type === 'Trailer');
-        return trailers;
+        data.results.filter((video) => video.type === 'Trailer') ;
+        return data;
     } catch (error) {
-        throw new Error(`Error in getTrailers: ${error.message}`);
+        // throw new Error(`Error in getTrailers: ${error.message}`);
     }
 }
 

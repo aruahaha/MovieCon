@@ -2,6 +2,7 @@
     display: flex;
     margin-bottom: 30px;
     position: relative;
+    padding-inline: 100px;
 }
 
 .popular-movie-div{
@@ -17,7 +18,6 @@
     scroll-snap-type: x mandatory;
     width: 100%;
     margin: 0 auto;
-
 }
 
 .popular-movie-div::-webkit-scrollbar{
@@ -36,23 +36,26 @@
     display: flex;
     justify-content: center;
     transition: 0.2s ease;
+    flex-direction: column;
+    text-decoration: none;
 }
 
-.scroller-movie-btn{
+.movie-link{
+    text-decoration: none;
+}
+
+.scroller-movie-name{
     font-family: 'Outfit', sans-serif !important;
     font-size: 20px;
-    position: absolute;
-    top: 45%;
-    color: #40A2D8;
+    color: black;
     border-radius: 10px;
     font-weight: 500;
-    text-align: center;
-    visibility: hidden;
 }
 
 .watchlist-btn{
     position: absolute;
     right: 0;
+    top: 0;
     border: none;
     background: transparent;
     color: white;
@@ -87,22 +90,14 @@
     transform: translateY(-20px);
 }
 
-.scroller-img-text-div:hover .popular-movie-image{
-    filter: blur(1px) brightness(0.5);
-}
-
-.scroller-img-text-div:hover .scroller-movie-btn{
-    visibility: visible;
-}
-
 .scroller-btn {
     border: none;
     background-color: transparent;
     width: 80px;
     position: absolute;
-    top: 9%;
+    top: 5%;
     z-index: 999;
-    height: 82%;
+    height: 85%;
     transition: background-color 0.3s ease; 
 }
 
@@ -118,7 +113,16 @@
     right: 0;
 }
 
+.not-found-image{
+    height: 270px;
+    border: 1px solid black;
+}
+
 @media (max-width: 850px){
+
+    .main-scroller-div{
+        padding: 0;
+    }
 
     .popular-movie-image{
         width: 200px;
@@ -127,6 +131,11 @@
     .scroller-btn{
         padding-inline: 5px;
         margin: 0;
+        width: 40px;
+    }
+
+    .not-found-image{
+        height: 300px;
     }
 
 }

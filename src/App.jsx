@@ -10,7 +10,7 @@ import Movies from "./Pages/Movies";
 import TvShows from "./Pages/TvShows";
 
 
-import Detailpage from "./Pages/Detailpage";
+import Detailpage , {loader as DetailPageLoader} from "./Pages/Detailpage";
 
 
 
@@ -19,7 +19,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route index element={<Home />} loader={HomePageLoader} />
     <Route path="/movies" element={<Movies />} />
     <Route path="/tvshows" element={<TvShows />} />
-    <Route path="/movie/:id" element={<Detailpage />} />
+    <Route path="/movie/:id" element={<Detailpage /> } loader={DetailPageLoader} />
   </Route>
 
 ))

@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
+
+import { getTrailers } from '../api';
 import './Trailers.css';
 import YouTube from 'react-youtube/dist/YouTube';
+import { Await } from 'react-router';
 
 
 export default function Trailers(props) {
-    console.log(props)
+
+    const [trailers, setTrailers] = useState(null);
+
+    useEffect(() => {
+        const idArray = props.data.map((item) => item.id);
+        const trailersData = idArray.map((id) => getTrailers(id));
+        setTrailers(trailersData)
+    }, [props.data]);
+
 
     return (
         <>
-            <div className='trailer-main-div'>
-                <div className='trailer-title-div'>
-                    <h1 className='trailer-title'>Trailers</h1>
-                </div>
-                {/* {movie && (
+            <Suspense fallback={<h1>Loading...</h1>}>
+                <div className='trailer-main-div'>
+                    <div className='trailer-title-div'>
+                        <h1 className='trailer-title'>Trailers</h1>
+                    </div>
                     <div className='trailer-name-video'>
                         <div className='youtube-trailer-div'>
-                            
+                            {/* {trailers?.map((item) => (
+                                <Await resolve={item}>
+                                    
+                                </Await>
+                            ))} */}
                         </div>
-                        <p>{movie.name}</p>
                     </div>
-                )} */}
-            </div>
+                </div>
+            </Suspense>
         </>
     );
 }
