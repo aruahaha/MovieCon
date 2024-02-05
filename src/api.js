@@ -80,7 +80,7 @@ export async function getTrailers(id) {
         data.results.filter((video) => video.type === 'Trailer') ;
         return data;
     } catch (error) {
-        // throw new Error(`Error in getTrailers: ${error.message}`);
+        throw new Error(`Error in getTrailers: ${error.message}`);
     }
 }
 
