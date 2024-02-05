@@ -98,7 +98,6 @@
 
 
 
-
 @media (max-width: 768px) {
     .pc-header {
         display: none;
@@ -111,7 +110,7 @@
         justify-content: space-between;
         padding: 0 38px;
         position: relative; 
-        z-index: 1000;
+        z-index: 10000;
         background-color: #0F0F0F;
     }
 
@@ -130,13 +129,13 @@
         background-color: #0F0F0F;
         /* border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px; */
-        z-index: 998; 
+        z-index: 9998; 
     }
 
     .active-menu {
         max-height: 250px;
         transition: max-height 0.3s ease; 
-        z-index: 999;
+        z-index: 9999;
     }
 
     .mob-header-menu>ul {
