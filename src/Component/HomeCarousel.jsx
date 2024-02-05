@@ -69,12 +69,14 @@ export default function HomeCarousel(props) {
                                                     {movie.original_language.toLowerCase() === 'en' ? movie.original_title || movie.original_name : movie.title}
                                                 </h1>
                                                 <div className="phone-carousel-btn-div">
+                                                {trailers?.[index]?.results && trailers[index].results.some(trailer => trailer.type === 'Trailer') && (
                                                     <Link
                                                         className='phone-carousel-more-btn play-btn'
-                                                        onClick={() => handleClickOpen(index)}
+                                                        to={`https://www.youtube.com/watch?v=${trailers[index].results.find(trailer => trailer.type === 'Trailer').key}`}
                                                     >
                                                         Trailer<PlayArrowIcon />
                                                     </Link>
+                                                )}
                                                 </div>
                                             </div>
 

@@ -17,7 +17,7 @@ export default function Detailpage() {
   return (
     <>
       <Suspense fallback={<h1>Loading..</h1>}>
-        <Await resolve={movie.movie}>
+        <Await resolve={movie?.movie}>
           {(movie) => (
             <DetailCard data={movie}/>
           )}
