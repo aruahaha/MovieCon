@@ -2,8 +2,6 @@ import React, { Suspense, useEffect, useState } from 'react';
 
 import { getTrailers } from '../api';
 import './Trailers.css';
-import YouTube from 'react-youtube/dist/YouTube';
-import { Await } from 'react-router';
 
 
 export default function Trailers(props) {

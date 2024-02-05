@@ -1,7 +1,6 @@
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Suspense, useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
