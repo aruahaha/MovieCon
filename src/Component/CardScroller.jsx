@@ -1,14 +1,11 @@
-import React, { useRef } from "react";
-import "./CardScroller.css"
-import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Link } from "react-router-dom";
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import React, { useRef } from "react";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-
-import myImage from "/assets/images/no-image.png"
+import { Link } from "react-router-dom";
+import "./CardScroller.css";
 
 const stylesAboveSeventy = {
     textColor: "#fff",
@@ -42,11 +39,7 @@ export default function CardScroller(props) {
                     {props.data.map((movie) => (
                         <Link key={movie.id} to={`/movie/${movie.id}`} className="movie-link">
                             <div className="scroller-img-text-div">
-                                {movie.poster_path ? (
-                                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="popular-movie-image" alt={movie.title} />
-                                ) : (
-                                    <img src={myImage} className="popular-movie-image not-found-image" alt="No Image" />
-                                )}
+                                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="popular-movie-image" alt={movie.title} />
                                 <span className='scroller-movie-name'>{movie.original_name ? movie.name : movie.title || movie.original_title}
                                 </span>
                                 <button className="watchlist-btn"><BookmarkBorderIcon /></button>
