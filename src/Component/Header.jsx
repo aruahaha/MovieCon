@@ -19,8 +19,8 @@ export default function Header() {
             <div className="pc-header">
                 <Link to="/" className="brand-name">MOVIECON</Link>
                 <ul>
-                    <li><NavLink to="/movies">Movies</NavLink></li>
-                    <li><NavLink to="/tvshows">TV Shows</NavLink></li>
+                    <li><NavLink to="/movies?page=1">Movies</NavLink></li>
+                    <li><NavLink to="/tvshows?page1">TV Shows</NavLink></li>
                     <div className="search-bar-div">
                         <div className={searchBarActive?"search-bar-active":"search-div"}>
                             <input placeholder="Search..." className={searchBarActive ? "search-bar-active" : "search-bar"} />
@@ -44,8 +44,8 @@ export default function Header() {
             </div>
             <div className={menuClass}>
                 <ul>
-                    <li><NavLink onClick={() => setMenuClass("mob-header-menu")} to="/movies">Movies</NavLink></li>
-                    <li><NavLink onClick={() => setMenuClass("mob-header-menu")} to="/tvshows">TV Shows</NavLink></li>
+                    <li><NavLink onClick={() => setMenuClass("mob-header-menu")} to="/movies?page=1">Movies</NavLink></li>
+                    <li><NavLink onClick={() => setMenuClass("mob-header-menu")} to="/tvshows?page=1">TV Shows</NavLink></li>
                 </ul>    
             </div>   
         </header>

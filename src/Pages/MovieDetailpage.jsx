@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { Await, defer, useLoaderData, useParams } from 'react-router'
 import { getMovieById, getTrendingMovies } from '../api'
 import DetailCard from '../Component/DetailCard'
-
+import Loading from '../Component/Loading'
 
 export function loader({ params }) {
   return defer({
@@ -15,14 +15,13 @@ export default function Detailpage() {
 
   return (
     <>
-      <Suspense fallback={<h1>Loading..</h1>}>
+      <Suspense fallback={<Loading/>}>
         <Await resolve={movie?.movie}>
           {(movie) => (
             <DetailCard data={movie}  />
           )}
         </Await>
       </Suspense>
-
     </>
   )
 }

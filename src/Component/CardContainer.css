@@ -1,0 +1,32 @@
+.movies-div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5rem;
+    padding: 80px 30px 50px 30px;
+}
+
+.movies-content{
+    display: flex;
+    transition: transform 200ms ease;
+}
+
+.movies-content:hover{
+    transform: translateY(-20px);
+}
+
+.movies-img{
+    width: 250px;
+}
+
+@media (max-width: 850px){
+
+    .movies-img{
+        width: 170px;
+    }
+
+    .movies-div{
+        gap: 20px;
+        padding: 30px 0px 30px 0px;
+    }
+}
