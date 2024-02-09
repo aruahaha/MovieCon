@@ -97,9 +97,11 @@ p{
 
     .card{
         width: 170px;
-        
     }
 
+    .card:hover {
+        transform: scale(1);
+    }
 
     .movies-img {
         width: 170px;

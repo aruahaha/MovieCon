@@ -36,7 +36,7 @@ export default function Movies() {
       <Suspense fallback={<Loading/>}>
         <Await resolve={movies.movies}>
           {(item) => (
-            <CardContainer data={item} />
+            <CardContainer data={item} toLink="/movie/"/>
           )}
         </Await>
         <div style={{display:"flex" , justifyContent:"center", marginBottom:"50px"}}> 

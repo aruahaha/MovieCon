@@ -13,7 +13,7 @@ export default function Header() {
     const [menuClass, setMenuClass] = useState("mob-header-menu")
     const [searchBarActive, setSearchBarActive] = useState(false)
     const [searchResults, setSearchResults] = useState([]);
-    const searchBarRef  = useRef(null)
+    const searchBarRef = useRef(null)
 
     function handleMenuToggle() {
         setMenuClass(prevClass => prevClass === "mob-header-menu" ? "mob-header-menu active-menu" : "mob-header-menu")
@@ -42,6 +42,7 @@ export default function Header() {
         <header>
             <div className="pc-header">
                 <Link to="/" className="brand-name">MOVIECON</Link>
+
                 <ul>
                     <li><NavLink to="/movies?page=1">Movies</NavLink></li>
                     <li><NavLink to="/tvshows?page=1">TV Shows</NavLink></li>
@@ -60,7 +61,7 @@ export default function Header() {
                     </div> */}
                     <div class="searchBox">
                         <div class="search">
-                            <input placeholder="Search..." type="text" onChange={handleSearchChange} ref={searchBarRef}/>
+                            <input placeholder="Search..." type="text" onChange={handleSearchChange} ref={searchBarRef} />
                             <button type="submit" onClick={togglebtn}>Go</button>
                         </div>
                     </div>
@@ -85,11 +86,18 @@ export default function Header() {
             </div>
             <div className="mob-header">
                 <Link className="brand-name">MOVIECON</Link>
-
-                <svg onClick={handleMenuToggle} xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16" color="white">
-                    <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-                </svg>
+                <div style={{display:"flex" , gap:"1rem" , alignItems:"center"}}>
+                    <Link to="/search">
+                        <SearchIcon sx={{
+                            fontSize:30
+                        }}/>
+                    </Link>
+                    <svg onClick={handleMenuToggle} xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16" color="white">
+                        <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    </svg>
+                </div>
             </div>
+
             <div className={menuClass}>
 
                 <ul>
