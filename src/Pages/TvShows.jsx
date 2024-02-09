@@ -10,7 +10,6 @@ import Loading from '../Component/Loading'
 
 export function loader({ request }) {
   const page = new URL(request.url).searchParams.get("page")
-  console.log(page)
   return defer({ tvshows: getPopularTvShows(page) })
 }
 
