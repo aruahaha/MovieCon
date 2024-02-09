@@ -1,18 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import { getSearch } from "../api";
 import "./Header.css"
+
+import myImage from "/assets/images/no-image.png"
 
 
 export default function Header() {
 
     const [menuClass, setMenuClass] = useState("mob-header-menu")
     const [searchBarActive, setSearchBarActive] = useState(false)
+    const [searchResults, setSearchResults] = useState([]);
+    const searchBarRef  = useRef(null)
 
     function handleMenuToggle() {
         setMenuClass(prevClass => prevClass === "mob-header-menu" ? "mob-header-menu active-menu" : "mob-header-menu")
     }
+
+    function handleSearchChange(event) {
+        const inputText = event.target.value;
+
+        getSearch(inputText)
+            .then(results => {
+                setSearchResults(results);
+                setSearchBarActive(true)
+            })
+            .catch(error => {
+                console.error("Error fetching search results:", error);
+                setSearchResults([]);
+            });
+    }
+
+    const togglebtn = () => {
+        setSearchBarActive(prev => !prev);
+        searchBarRef.current.value = ""
+    };
 
     return (
         <header>
@@ -20,8 +44,8 @@ export default function Header() {
                 <Link to="/" className="brand-name">MOVIECON</Link>
                 <ul>
                     <li><NavLink to="/movies?page=1">Movies</NavLink></li>
-                    <li><NavLink to="/tvshows?page1">TV Shows</NavLink></li>
-                    <div className="search-bar-div">
+                    <li><NavLink to="/tvshows?page=1">TV Shows</NavLink></li>
+                    {/* <div className="search-bar-div">
                         <div className={searchBarActive?"search-bar-active":"search-div"}>
                             <input placeholder="Search..." className={searchBarActive ? "search-bar-active" : "search-bar"} />
                             <button className={searchBarActive ? "cross-btn-active" : "search-bar"} onClick={() => {
@@ -33,21 +57,46 @@ export default function Header() {
                         }} className={searchBarActive ? "symbol-btn" : "symbol-btn-active"}>
                             <SearchIcon style={{ color: "white" }} /> 
                         </button>
+                    </div> */}
+                    <div class="searchBox">
+                        <div class="search">
+                            <input placeholder="Search..." type="text" onChange={handleSearchChange} ref={searchBarRef}/>
+                            <button type="submit" onClick={togglebtn}>Go</button>
+                        </div>
                     </div>
+                    {searchBarActive ?
+                        <div className="search-list">
+                            {searchResults?.results?.map((item) => (
+                                <Link to={`/${item.media_type}/${item.id}`} onClick={togglebtn} className="search-link">
+                                    <div className="search-content">
+                                        {item.poster_path ?
+                                            <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} className="search-img" /> : <img src={myImage} className="search-img" />
+                                        }
+                                        <div className="search-titles">
+                                            <h6 className="search-movie-name">{item.original_title || item.original_name ? item.title || item.name : ""}</h6>
+                                            <p className="search-media-type">{item.media_type}</p>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div> : <div></div>
+                    }
                 </ul>
             </div>
             <div className="mob-header">
                 <Link className="brand-name">MOVIECON</Link>
+
                 <svg onClick={handleMenuToggle} xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16" color="white">
-                    <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                 </svg>
             </div>
             <div className={menuClass}>
+
                 <ul>
                     <li><NavLink onClick={() => setMenuClass("mob-header-menu")} to="/movies?page=1">Movies</NavLink></li>
                     <li><NavLink onClick={() => setMenuClass("mob-header-menu")} to="/tvshows?page=1">TV Shows</NavLink></li>
-                </ul>    
-            </div>   
+                </ul>
+            </div>
         </header>
     )
 }

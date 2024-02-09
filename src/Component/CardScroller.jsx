@@ -27,7 +27,6 @@ const stylesRemaining = {
 }
 
 export default function CardScroller(props) {
-
     const ref = useRef(null);
 
     const scroll = (scrollOffset) => {

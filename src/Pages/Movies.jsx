@@ -20,7 +20,6 @@ export default function Movies() {
   const movies = useLoaderData()
   const [searchParams, setSearchParams] = useSearchParams()
   const page = Number(searchParams.get("page"))
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

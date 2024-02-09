@@ -6,6 +6,9 @@ import 'react-circular-progressbar/dist/styles.css';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 const stylesAboveSeventy = {
@@ -27,6 +30,7 @@ const stylesRemaining = {
 export default function DetailCard({ data }) {
     const { id } = useParams();
     const [trailer, setTrailer] = useState(null);
+    const [open, setOpen] = React.useState(false);
 
     useEffect(() => {
         const fetchTrailer = async () => {
@@ -36,6 +40,15 @@ export default function DetailCard({ data }) {
 
         fetchTrailer().catch(console.error);
     }, [id]);
+
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const filteredTrailers = trailer ? trailer.results.filter(trailer => trailer.type === 'Trailer') : [];
 
@@ -81,7 +94,7 @@ export default function DetailCard({ data }) {
                             }
                             Users Score
                         </div>
-                        <Link style={{textDecoration:"none", color:"white"}} to={`https://www.youtube.com/watch?v=${filteredTrailers[0]?.key}`}>Trailer <PlayArrowIcon/></Link>
+                        <Link style={{ textDecoration: "none", color: "white" }} to={`https://www.youtube.com/watch?v=${filteredTrailers[0]?.key}`}>Trailer <PlayArrowIcon /></Link>
                     </div>
                     <div className='info-div'>
                         <h1 className='content-title'>
@@ -108,6 +121,67 @@ export default function DetailCard({ data }) {
                                 <span>{data.tagline}</span>
                             </div>
                             <div className='info-div'>
+                                <div className='pc-percent-trailer'>
+                                    <div className='pc-percentage'>
+                                        {Math.ceil(data.vote_average * 10) >= 70 ?
+                                            <CircularProgressbar
+                                                value={Math.ceil(data.vote_average * 10)}
+                                                text={`${Math.ceil(data.vote_average * 10)}%`}
+                                                styles={buildStyles(
+                                                    stylesAboveSeventy
+                                                )}
+                                            />
+                                            :
+                                            Math.ceil(data.vote_average * 10) >= 40
+                                                ?
+                                                <CircularProgressbar
+                                                    value={Math.ceil(data.vote_average * 10)}
+                                                    text={`${Math.ceil(data.vote_average * 10)}%`}
+                                                    styles={buildStyles(
+                                                        stylesAboveForty
+                                                    )}
+                                                />
+                                                :
+                                                <CircularProgressbar
+                                                    value={Math.ceil(data.vote_average * 10)}
+                                                    text={`${Math.ceil(data.vote_average * 10)}%`}
+                                                    styles={buildStyles(
+                                                        stylesRemaining
+                                                    )}
+                                                />
+                                        }
+                                        Users Score
+                                    </div>
+
+                                    <>
+                                        <Link
+                                            className='carousel-more-btn play-btn'
+                                            onClick={handleClickOpen}
+                                        >
+                                            Trailer<PlayArrowIcon />
+                                        </Link>
+                                        <Dialog
+                                            open={open}
+                                            onClose={handleClose}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <DialogContent className='youtube-video'>
+                                                <iframe
+                                                    src={`https://www.youtube.com/embed/${filteredTrailers[0]?.key}`}
+                                                    width="1500"
+                                                    height="800"
+                                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowFullScreen
+                                                />
+                                            </DialogContent>
+                                        </Dialog>
+                                    </>
+
+                                </div>
+                                <h1 className='overview-title'>
+                                    Overview
+                                </h1>
                                 <p>
                                     {data.overview}
                                 </p>

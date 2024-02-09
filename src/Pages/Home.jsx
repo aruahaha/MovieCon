@@ -17,7 +17,7 @@ export async function loader() {
     return defer({
         trendingMovies: getTrendingMovies(),
         popularMovies: getPopularMovies(1),
-        tvShows: getPopularTvShows(),
+        tvShows: getPopularTvShows(1),
     });
 }
 
