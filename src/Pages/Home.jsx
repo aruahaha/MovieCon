@@ -10,12 +10,14 @@ import HomeCarousel from "../Component/HomeCarousel";
 import { Link } from "react-router-dom";
 import Trailers from "../Component/Trailers";
 
+import Loading from "../Component/Loading";
+
 
 export async function loader() {
     return defer({
         trendingMovies: getTrendingMovies(),
         popularMovies: getPopularMovies(1),
-        tvShows: getPopularTvShows(),
+        tvShows: getPopularTvShows(1),
     });
 }
 
@@ -27,11 +29,11 @@ export default function Home() {
     return (
         <div className="main-home-div">
             <div>
-                <Suspense fallback={<h1>Loading...</h1>}>
+                <Suspense fallback={<Loading/>}>
                     <Await resolve={movies.trendingMovies}>
                         {(trendingMovies) => (
                             <>
-                                <HomeCarousel data={trendingMovies.results} />
+                                <HomeCarousel data={trendingMovies.results} toLink={"/movie/"}/>
                             </>
                         )}
                     </Await>
@@ -42,7 +44,7 @@ export default function Home() {
                                     <h1 className="popualr-movie-title">Popular Movies</h1>
                                     <Link className="popular-more">More...</Link>
                                 </div>
-                                <CardScroller data={popularMovies.results} />
+                                <CardScroller data={popularMovies.results} toLink={"/movie/"}/>
                                 
                             </>
                         )}
@@ -54,7 +56,7 @@ export default function Home() {
                                     <h1 className="popualr-movie-title">Tv Shows</h1>
                                     <Link className="popular-more">More...</Link>
                                 </div>
-                                <CardScroller data={tvShows.results} />
+                                <CardScroller data={tvShows.results} toLink={"/tv/"}/>
                             </>
                         )}
                     </Await>

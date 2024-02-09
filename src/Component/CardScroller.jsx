@@ -27,7 +27,6 @@ const stylesRemaining = {
 }
 
 export default function CardScroller(props) {
-
     const ref = useRef(null);
 
     const scroll = (scrollOffset) => {
@@ -40,7 +39,7 @@ export default function CardScroller(props) {
                 <button onClick={() => { scroll(-200) }} className="scroller-btn-left scroller-btn"><ArrowBackIosIcon /></button>
                 <div className="popular-movie-div" ref={ref}>
                     {props.data.map((movie) => (
-                        <Link key={movie.id} to={`/movie/${movie.id}`} className="movie-link">
+                        <Link key={movie.id} to={props.toLink+movie.id} className="movie-link">
                             <div className="scroller-img-text-div">
                                 {movie.poster_path ? (
                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="popular-movie-image" alt={movie.title} />

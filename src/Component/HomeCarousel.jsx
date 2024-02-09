@@ -62,7 +62,7 @@ export default function HomeCarousel(props) {
                                     <div className='overlay-div'>
                                         <div className='phone-carousel-percentage-div'>
                                             <div className='phone-carousel-content-div'>
-                                                <Link to={`/movie/${movie.id}`}>
+                                                <Link to={props.toLink+movie.id}>
                                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="phone-carousel-poster-image" />
                                                 </Link>
                                                 <h1 className='phone-carousel-title movie-title'>
@@ -161,7 +161,7 @@ export default function HomeCarousel(props) {
                                                 </div>
                                             </div>
                                             <div className='carousel-btns'>
-                                                <Link to={`/movie/${movie.id}`} className='carousel-more-btn'>View More</Link>
+                                                <Link to={props.toLink+movie.id} className='carousel-more-btn'>View More</Link>
                                                 {trailers?.[index]?.results && trailers[index].results.some(trailer => trailer.type === 'Trailer') && (
                                                     <>
                                                         <Link
