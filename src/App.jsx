@@ -13,10 +13,13 @@ import TvShows , {loader as TvShowsPageloader}from "./Pages/TvShows";
 import MovieDetailpage, { loader as MovieDetailPageLoader } from "./Pages/MovieDetailpage";
 import TvDetailpage, { loader as TvShowDetailPageLoader } from "./Pages/TvDetailpage";
 
+import SearchPage from "./Pages/SearchPage";
+
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout />}>
     <Route index element={<Home />} loader={HomePageLoader} />
+    <Route path="/search" element={<SearchPage/>}/>
     <Route path="/movies" element={<Movies />} loader={MoviesPageLoader} />
     <Route path="/tvshows" element={<TvShows />} loader={TvShowsPageloader}/>
     <Route path="/movie/:id" element={<MovieDetailpage />} loader={MovieDetailPageLoader} errorElement={<ErrorBoundary/>}/>

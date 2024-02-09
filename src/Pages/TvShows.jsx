@@ -38,7 +38,7 @@ export default function TvShows() {
       <Suspense fallback={<Loading/>}>
         <Await resolve={tvshows?.tvshows}>
           {(item) => (
-            <CardContainer data={item} />
+            <CardContainer data={item} toLink="/tv/"/>
           )}
         </Await>
         <div style={{display:"flex" , justifyContent:"center", marginBottom:"50px"}}> 

@@ -11,6 +11,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
+
 const stylesAboveSeventy = {
     textColor: "#fff",
     pathColor: "greenyellow",
@@ -32,6 +33,10 @@ export default function DetailCard({ data }) {
     const [trailer, setTrailer] = useState(null);
     const [open, setOpen] = React.useState(false);
 
+   
+
+    
+
     useEffect(() => {
         const fetchTrailer = async () => {
             const trailersData = await getTrailers(id);
@@ -49,6 +54,8 @@ export default function DetailCard({ data }) {
     const handleClose = () => {
         setOpen(false);
     };
+
+
 
     const filteredTrailers = trailer ? trailer.results.filter(trailer => trailer.type === 'Trailer') : [];
 
@@ -103,20 +110,27 @@ export default function DetailCard({ data }) {
                         <p className='overview'>
                             {data.overview}
                         </p>
+                        <div>
+                            <h1 className='content-title'>Genres</h1>
+                            <div style={{ display: "flex", gap: "1rem" }}>
+                                {data.genres.map((item) => (
+                                    <p className='genres'>{item.name}</p>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div className='main-div'>
                 <img src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} className='bg-img' />
-                <div className='bg-div'>
+                <div className='bg-div' >
                     <div className='content-div'>
                         <img src={`https://image.tmdb.org/t/p/w500${data.poster_path}`} className='poster-img' />
-
                         <div className='content'>
                             <div className='name-div'>
                                 <h1 className='content-title'>
-                                    {data.original_language.toLowerCase() === 'en' ? data.original_title || data.original_name : data.title}
+                                    {data.original_language ? data.original_title || data.original_name : data.title}
                                 </h1>
                                 <span>{data.tagline}</span>
                             </div>
@@ -179,12 +193,18 @@ export default function DetailCard({ data }) {
                                     </>
 
                                 </div>
-                                <h1 className='overview-title'>
+                                <h1 className='content-title'>
                                     Overview
                                 </h1>
-                                <p>
+                                <p className='overview-info'>
                                     {data.overview}
                                 </p>
+                                <h1 className='content-title'>Genres</h1>
+                                <div style={{ display: "flex", gap: "1rem" }}>
+                                    {data.genres.map((item) => (
+                                        <p className='genres'>{item.name}</p>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
