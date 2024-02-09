@@ -9,7 +9,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { ColorExtractor } from "react-color-extractor";
+
 
 
 const stylesAboveSeventy = {
@@ -32,11 +32,8 @@ export default function DetailCard({ data }) {
     const { id } = useParams();
     const [trailer, setTrailer] = useState(null);
     const [open, setOpen] = React.useState(false);
-    const [colors, setColors] = useState(null); // Define useState hook for colors
 
-    const getColors = (detectedColorCodes) => {
-        setColors(detectedColorCodes);
-    };
+   
 
     console.log(colors)
 
@@ -58,9 +55,7 @@ export default function DetailCard({ data }) {
         setOpen(false);
     };
 
-    const linearGradientStyle = {
-        background: `linear-gradient(to right, ${colors && colors.length > 0 ? colors[0] : 'transparent'}, rgba(10.5, 31.5, 52.5, 0.84) 80%, rgba(10.5, 31.5, 52.5, 0.84) 100%)`
-    };
+
 
     const filteredTrailers = trailer ? trailer.results.filter(trailer => trailer.type === 'Trailer') : [];
 
@@ -131,9 +126,7 @@ export default function DetailCard({ data }) {
                 <img src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} className='bg-img' />
                 <div className='bg-div' style={linearGradientStyle}>
                     <div className='content-div'>
-                        <ColorExtractor getColors={getColors}>
-                            <img src={`https://image.tmdb.org/t/p/w500${data.poster_path}`} className='poster-img' />
-                        </ColorExtractor>
+                        <img src={`https://image.tmdb.org/t/p/w500${data.poster_path}`} className='poster-img' />
                         <div className='content'>
                             <div className='name-div'>
                                 <h1 className='content-title'>
