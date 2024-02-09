@@ -10,7 +10,7 @@ export default function CardContainer({ data , toLink}) {
         <>
             <div className='movies-div'>
                 {data?.results.map((item, index) => (
-                    <Link to={item.media_type ? `/${item.media_type}/${item.id}` : toLink+item.id}>
+                    <Link to={item.media_type ? `/${item.media_type}/${item.id}` : toLink+item.id} style={{textDecoration:"none"}}>
                         <div className='movies-content' key={index}>
                             <div class="card">
                                 {item.poster_path ?
