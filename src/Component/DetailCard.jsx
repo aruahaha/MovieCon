@@ -35,7 +35,7 @@ export default function DetailCard({ data }) {
 
    
 
-    console.log(colors)
+    
 
     useEffect(() => {
         const fetchTrailer = async () => {
@@ -124,7 +124,7 @@ export default function DetailCard({ data }) {
 
             <div className='main-div'>
                 <img src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} className='bg-img' />
-                <div className='bg-div' style={linearGradientStyle}>
+                <div className='bg-div' >
                     <div className='content-div'>
                         <img src={`https://image.tmdb.org/t/p/w500${data.poster_path}`} className='poster-img' />
                         <div className='content'>
