@@ -116,10 +116,9 @@ export async function getTrailers(id) {
         }
 
         const data = await response.json();
-        data.results.filter((video) => video.type === 'Trailer');
         return data;
     } catch (error) {
-        // throw new Error(`Error in getTrailers: ${error.message}`);
+        throw new Error(`Error in getTrailers: ${error.message}`);
     }
 }
 
@@ -133,10 +132,10 @@ export async function getSearch(query) {
         }
 
         const data = await response.json();
-        data.results.filter((video) => video.type === 'Trailer');
+        
         return data;
     } catch (error) {
-        // throw new Error(`Error in getTrailers: ${error.message}`);
+        throw new Error(`Error in getTrailers: ${error.message}`);
     }
 }
 
@@ -158,7 +157,7 @@ export async function getGenre(type) {
         const data = await response.json();
         return data;
     } catch (error) {
-        // throw new Error(`Error in getTrailers: ${error.message}`);
+        throw new Error(`Error in getTrailers: ${error.message}`);
     }
 }
 
