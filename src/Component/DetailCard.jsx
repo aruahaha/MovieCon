@@ -1,17 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import "./DetailCard.css"
-import { getTrailers } from '../api';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import { Alert } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import React, { useEffect, useMemo, useState } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import myImage from "/assets/images/no-image.png"
-import { Alert } from '@mui/material';
-import CheckIcon from '@mui/icons-material/Check';
+import { getTrailers } from '../api';
+import "./DetailCard.css";
+import myImage from "/assets/images/no-image.png";
 
 const stylesAboveSeventy = {
     textColor: "#fff",

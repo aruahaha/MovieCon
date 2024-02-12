@@ -1,6 +1,5 @@
 import React, { useRef, useMemo, memo } from "react";
 import "./CardScroller.css";
-import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Link } from "react-router-dom";
