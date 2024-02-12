@@ -1,0 +1,88 @@
+.search {
+    display: inline-block;
+    position: relative;
+}
+
+.search input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-link[type="submit"] {
+    background-color: #4e99e9;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: .9s ease;
+}
+
+.search-link[type="submit"]:hover {
+    transform: scale(1.1);
+    color: rgb(255, 255, 255);
+    background-color: blue;
+}
+
+.search-list {
+    position: absolute;
+    top: 91px;
+    right: 0;
+    width: 500px;
+    z-index: 99999;
+    max-height: 500px;
+    background-color: #40A2D8;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: 1rem;
+}
+
+.search-list>ul {
+    margin: 0;
+    padding: 0;
+}
+
+.search-link>ul>li {
+    list-style: none;
+}
+
+.search-link {
+    text-decoration: none;
+    color: white;
+}
+
+.search-img {
+    width: 100px;
+    padding: 5px;
+}
+
+.search-content {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 500;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-movie-name {
+    font-size: 20px;
+}
+
+.search-media-type {
+    color: #0F0F0F;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.search-titles {
+    display: flex;
+    flex-direction: column;
+}

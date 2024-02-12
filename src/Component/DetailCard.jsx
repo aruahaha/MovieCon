@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import "./DetailCard.css"
 import { getTrailers } from '../api';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
@@ -9,43 +9,43 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-
-
+import myImage from "/assets/images/no-image.png"
+import { Alert } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
 
 const stylesAboveSeventy = {
     textColor: "#fff",
     pathColor: "greenyellow",
     trailColor: "grey"
-}
+};
 const stylesAboveForty = {
     textColor: "#fff",
     pathColor: "yellow",
     trailColor: "grey"
-}
+};
 const stylesRemaining = {
     textColor: "#fff",
     pathColor: "red",
     trailColor: "grey"
-}
+};
 
 export default function DetailCard({ data }) {
     const { id } = useParams();
     const [trailer, setTrailer] = useState(null);
-    const [open, setOpen] = React.useState(false);
-
-   
-
-    
+    const [open, setOpen] = useState(false);
+    const [watchlistAlertOpen, setWatchlistAlertOpen] = useState(false);
 
     useEffect(() => {
         const fetchTrailer = async () => {
-            const trailersData = await getTrailers(id);
-            setTrailer(trailersData);
+            try {
+                const trailersData = await getTrailers(id);
+                setTrailer(trailersData);
+            } catch (error) {
+                console.error(error);
+            }
         };
-
-        fetchTrailer().catch(console.error);
+        fetchTrailer();
     }, [id]);
-
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -55,10 +55,18 @@ export default function DetailCard({ data }) {
         setOpen(false);
     };
 
+    const filteredTrailers = useMemo(() => {
+        return trailer ? trailer.results.filter(trailer => trailer.type === 'Trailer') : [];
+    }, [trailer]);
 
+    const handleWatchListClick = () => {
+        setWatchlistAlertOpen(true);
+        setTimeout(() => {
+            setWatchlistAlertOpen(false);
+        }, 2000);
+    };
 
-    const filteredTrailers = trailer ? trailer.results.filter(trailer => trailer.type === 'Trailer') : [];
-
+    
     return (
         <>
             <div className='phone-main-div'>
@@ -66,9 +74,14 @@ export default function DetailCard({ data }) {
                 <div className='content'>
                     <div className='name-div'>
                         <h1 className='content-title'>
-                            {data.original_language.toLowerCase() === 'en' ? data.original_title || data.original_name : data.title}
+                            {data.original_name ? data.original_title || data.original_name : data.title}
                         </h1>
                         <span>{data.tagline}</span>
+                    </div>
+                    <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
+                        {data.genres.map((item) => (
+                            <p className='genres'>{item.name}</p>
+                        ))}
                     </div>
                     <div className='percent-trailer'>
                         <div className='percentage'>
@@ -110,31 +123,47 @@ export default function DetailCard({ data }) {
                         <p className='overview'>
                             {data.overview}
                         </p>
-                        <div>
-                            <h1 className='content-title'>Genres</h1>
-                            <div style={{ display: "flex", gap: "1rem" }}>
-                                {data.genres.map((item) => (
-                                    <p className='genres'>{item.name}</p>
-                                ))}
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
 
             <div className='main-div'>
+                <Alert severity="success" sx={{
+                    display: watchlistAlertOpen ? "flex" : "none",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    position: "absolute",
+                    right: 0,
+                    padding: "20px",
+                    zIndex: 9999,
+                    fontSize: 20
+                }}>
+
+                    Added in watchlist
+                </Alert>
+
                 <img src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} className='bg-img' />
-                <div className='bg-div' >
+                <div className='bg-div'>
                     <div className='content-div'>
+
                         <img src={`https://image.tmdb.org/t/p/w500${data.poster_path}`} className='poster-img' />
+
                         <div className='content'>
                             <div className='name-div'>
                                 <h1 className='content-title'>
-                                    {data.original_language ? data.original_title || data.original_name : data.title}
+                                    {data.original_name ? data.name : data.title}
                                 </h1>
                                 <span>{data.tagline}</span>
                             </div>
+                            <div style={{ display: "flex", gap: "1rem" }}>
+                                {data.genres.map((item) => (
+                                    <p className='genres'>{item.name}</p>
+                                ))}
+                            </div>
                             <div className='info-div'>
+
+                                <p>Release Date :- {data.release_date}</p>
                                 <div className='pc-percent-trailer'>
                                     <div className='pc-percentage'>
                                         {Math.ceil(data.vote_average * 10) >= 70 ?
@@ -174,6 +203,12 @@ export default function DetailCard({ data }) {
                                         >
                                             Trailer<PlayArrowIcon />
                                         </Link>
+                                        <Link
+                                            className='carousel-more-btn watchlist play-btn'
+                                            onClick={() => handleWatchListClick()}
+                                        >
+                                            Add to watchlist
+                                        </Link>
                                         <Dialog
                                             open={open}
                                             onClose={handleClose}
@@ -199,15 +234,42 @@ export default function DetailCard({ data }) {
                                 <p className='overview-info'>
                                     {data.overview}
                                 </p>
-                                <h1 className='content-title'>Genres</h1>
-                                <div style={{ display: "flex", gap: "1rem" }}>
-                                    {data.genres.map((item) => (
-                                        <p className='genres'>{item.name}</p>
-                                    ))}
-                                </div>
+                                <h1 className='content-title director-title'>
+                                    Directed By :-
+                                </h1>
+                                {data?.credits?.crew ? (
+                                    <p>
+                                        {data?.credits?.crew?.filter((person) => person.job === "Director").map((person) => (
+                                            person.original_name
+                                        )).join(" , ")}
+                                    </p>
+                                ) : (
+                                    <p>
+                                        {data.created_by.map((person) => (
+                                            person.name
+                                        )).join(" , ")}
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div>
+                <div className="cast-title-div">
+                    <h1 className="cast-title">Cast</h1>
+                </div>
+                <div className="cast-div">
+                    {data?.credits?.cast?.map((item) => (
+                        <div className='cast-img-name'>
+                            {item.profile_path ?
+                                <img src={`https://image.tmdb.org/t/p/w500${item.profile_path}`} className='cast-img' />
+                                :
+                                <img src={myImage} className='cast-img img-not-found' />
+                            }
+                            <h1 className='cast-name'>{item.name}</h1>
+                        </div>
+                    ))}
                 </div>
             </div>
         </>

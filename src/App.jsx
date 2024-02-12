@@ -15,6 +15,8 @@ import TvDetailpage, { loader as TvShowDetailPageLoader } from "./Pages/TvDetail
 
 import SearchPage from "./Pages/SearchPage";
 
+import WatchList from "./Pages/Watchlist";
+
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path="/" element={<Layout />}>
@@ -24,6 +26,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/tvshows" element={<TvShows />} loader={TvShowsPageloader}/>
     <Route path="/movie/:id" element={<MovieDetailpage />} loader={MovieDetailPageLoader} errorElement={<ErrorBoundary/>}/>
     <Route path="/tv/:id" element={<TvDetailpage />} loader={TvShowDetailPageLoader} errorElement={<ErrorBoundary/>}/>
+    <Route path="/watchlist" element={<WatchList />} errorElement={<ErrorBoundary/>}/>
   </Route>
 ));
 

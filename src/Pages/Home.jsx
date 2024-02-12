@@ -8,7 +8,6 @@ import CardScroller from "../Component/CardScroller";
 import HomeCarousel from "../Component/HomeCarousel";
 
 import { Link } from "react-router-dom";
-import Trailers from "../Component/Trailers";
 
 import Loading from "../Component/Loading";
 
