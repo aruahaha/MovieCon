@@ -1,34 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./CardContainer.css"
 import myImage from "/assets/images/no-image.png"
 import { Link } from 'react-router-dom'
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
-export default function CardContainer({ data , toLink}) {
-    console.log(data)
+export default function CardContainer({ data, toLink }) {
     return (
         <>
-            <div className='movies-div'>
-                {data?.results.map((item, index) => (
-                    <Link to={item.media_type ? `/${item.media_type}/${item.id}` : toLink+item.id} style={{textDecoration:"none"}}>
-                        <div className='movies-content' key={index}>
-                            <div class="card">
-                                {item.poster_path ?
-                                    <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} className='movies-img' />
-                                    :
-                                    <img src={myImage} className='movies-img' />
-                                }
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path></svg> */}
-                                <div class="card__content">
-                                    <p class="card__title">{item.name ? item.name : item.title}</p>
-                                    <div className='description'>
-                                        <p class="card__description">{item.release_date ? item.release_date : item.first_air_date}</p>
+            <div>
+                <div className='movies-div'>
+                    {data?.results?.map((item, index) => (
+                        <Link to={item.media_type ? `/${item.media_type}/${item.id}` : toLink + item.id} style={{ textDecoration: "none" }} key={index}>
+                            <div className='movies-content'>
+                                <div className="card">
+                                    {item.poster_path ?
+                                        <LazyLoadImage
+                                            src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                                            className='movies-img'
+                                            effect='blur'
+                                            wrapperProps={{
+                                                style: { transitionDelay: "1s" },
+                                            }}
+                                            loading='lazy'
+                                        />
+                                        :
+                                        <img src={myImage} className='movies-img' alt="No Poster Available" />
+                                    }
+                                    <div className="card__content">
+                                        <p className="card__title">{item.name ? item.name : item.title}</p>
+                                        <div className='description'>
+                                            <p className="card__description">{item.release_date ? item.release_date : item.first_air_date}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </Link>
-                ))}
+                        </Link>
+                    ))}
+                </div>
             </div>
         </>
     )
