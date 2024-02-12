@@ -23,8 +23,8 @@ export default function SearchPage() {
 
     return (
         <>
-            <div class="searchBox-page">
-                <div class="search-page">
+            <div className="searchBox-page">
+                <div className="search-page">
                     <h1>Search</h1>
                     <input placeholder="Search..." type="text" onChange={handleSearchChange} />
                 </div>

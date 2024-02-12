@@ -30,7 +30,7 @@ export function loader({ request }) {
 export default function TvShows() {
 
   const data = useLoaderData()
-  console.log(data)
+  
   const [searchParams, setSearchParams] = useSearchParams()
   const page = Number(searchParams.get("page"))
 
@@ -54,7 +54,7 @@ export default function TvShows() {
       <Suspense fallback={<Loading />}>
         <Await resolve={data.genre}>
           {(genre) => (
-            <Filter data={genre} />
+            <Filter data={genre} name={"Shows"} />
           )}
         </Await>
         <Await resolve={data.tvshows}>

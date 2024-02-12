@@ -106,8 +106,24 @@ export async function getTvShowById(id) {
 }
 
 
-export async function getTrailers(id) {
-    const url = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${import.meta.env.VITE_API_KEY}&language=en-US`;
+export async function getTrailers(id,type) {
+    const url = `https://api.themoviedb.org/3${type}${id}/videos?api_key=${import.meta.env.VITE_API_KEY}&language=en-US`;
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch trailers. HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        throw new Error(`Error in getTrailers: ${error.message}`);
+    }
+}
+
+export async function getTvTrailers(id,type) {
+    const url = `https://api.themoviedb.org/3${type}${id}/videos?api_key=${import.meta.env.VITE_API_KEY}&language=en-US`;
     try {
         const response = await fetch(url);
 

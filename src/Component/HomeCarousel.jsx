@@ -44,7 +44,7 @@ export default function HomeCarousel(props) {
 
     useEffect(() => {
         const idArray = props.data.map((item) => item.id);
-        const trailersPromises = idArray.map((id) => getTrailers(id));
+        const trailersPromises = idArray.map((id) => getTrailers(id,props.toLink));
         Promise.all(trailersPromises)
             .then((trailers) => setTrailers(trailers))
             .catch((error) => console.error(error));
