@@ -41,7 +41,7 @@ export default function Home() {
                             <>
                                 <div className="popular-title-div">
                                     <h1 className="popualr-movie-title">Popular Movies</h1>
-                                    <Link className="popular-more">More...</Link>
+                                    <Link className="popular-more" to="/movies?page=1">More...</Link>
                                 </div>
                                 <CardScroller data={popularMovies.results} toLink={"/movie/"}/>
                                 
@@ -53,7 +53,7 @@ export default function Home() {
                             <>
                                 <div className="popular-title-div">
                                     <h1 className="popualr-movie-title">Tv Shows</h1>
-                                    <Link className="popular-more">More...</Link>
+                                    <Link className="popular-more" to="/tvshows?page=1">More...</Link>
                                 </div>
                                 <CardScroller data={tvShows.results} toLink={"/tv/"}/>
                             </>
