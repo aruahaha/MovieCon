@@ -1,6 +1,8 @@
 .filter-div {
+    font-family: 'Oswald', sans-serif !important;
+    font-weight: 900;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     padding-inline: 9%;
     padding-top: 30px;
 }
@@ -42,4 +44,10 @@
 .select-item input[type="checkbox"]:checked+span {
     background-color: #40A2D8;
     color: white;
+}
+
+@media (max-width: 850px) {
+    .filter-div{
+        padding-inline: 5%;
+    }
 }

@@ -30,8 +30,8 @@ export default function Searchbar() {
 
     return (
         <>
-            <div class="searchBox">
-                <div class="search">
+            <div className="searchBox">
+                <div className="search">
                     <input
                         placeholder="Search..."
                         type="text"

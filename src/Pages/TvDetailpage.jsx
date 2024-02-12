@@ -18,7 +18,7 @@ export default function Detailpage() {
       <Suspense fallback={<Loading/>}>
         <Await resolve={tvshow?.tvshow}>
           {(tvshow) => (
-            <DetailCard data={tvshow}  />
+            <DetailCard data={tvshow} toLink="/tv/" />
           )}
         </Await>
       </Suspense>

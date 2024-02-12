@@ -6,7 +6,7 @@ import Loading from '../Component/Loading'
 
 export function loader({ params }) {
   return defer({
-  movie: getMovieById(params.id),
+    movie: getMovieById(params.id),
   })
 }
 
@@ -15,10 +15,12 @@ export default function Detailpage() {
 
   return (
     <>
-      <Suspense fallback={<Loading/>}>
+      <Suspense fallback={<Loading />}>
         <Await resolve={movie?.movie}>
           {(movie) => (
-            <DetailCard data={movie}  />
+            <>
+              <DetailCard data={movie} toLink="/movie/" />
+            </>
           )}
         </Await>
       </Suspense>

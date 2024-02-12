@@ -27,16 +27,16 @@ const stylesRemaining = {
     trailColor: "grey"
 };
 
-export default function DetailCard({ data }) {
+export default function DetailCard({ data , toLink}) {
     const { id } = useParams();
     const [trailer, setTrailer] = useState(null);
     const [open, setOpen] = useState(false);
     const [watchlistAlertOpen, setWatchlistAlertOpen] = useState(false);
-
+    
     useEffect(() => {
         const fetchTrailer = async () => {
             try {
-                const trailersData = await getTrailers(id);
+                const trailersData = await getTrailers(id , toLink);
                 setTrailer(trailersData);
             } catch (error) {
                 console.error(error);
@@ -57,6 +57,7 @@ export default function DetailCard({ data }) {
     const filteredTrailers = useMemo(() => {
         return trailer ? trailer.results.filter(trailer => trailer.type === 'Trailer') : [];
     }, [trailer]);
+
 
     const handleWatchListClick = () => {
         setWatchlistAlertOpen(true);
@@ -196,13 +197,17 @@ export default function DetailCard({ data }) {
                                     </div>
 
                                     <>
+                                    {filteredTrailers.length > 0 
+                                        ?
                                         <Link
                                             className='carousel-more-btn play-btn'
                                             onClick={handleClickOpen}
                                         >
                                             Trailer<PlayArrowIcon />
                                         </Link>
-                                        <Link
+                                        : <></>
+                                    }
+                                    <Link
                                             className='carousel-more-btn watchlist play-btn'
                                             onClick={() => handleWatchListClick()}
                                         >

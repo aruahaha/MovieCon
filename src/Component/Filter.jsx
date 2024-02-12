@@ -12,6 +12,7 @@ import { useSearchParams } from "react-router-dom";
 
 
 export default function Filter(genre) {
+    
     const [open, setOpen] = useState(false);
     const [checkedGenres, setCheckedGenres] = useState([]);
     const [movieDetails, setMovieDetails] = useState([])
@@ -70,7 +71,8 @@ export default function Filter(genre) {
 
     return (
         <div className='filter-div'>
-            <div>
+            <h1>{genre.name}</h1>
+            <div style={{display:"flex" , gap:"1rem"}}>
                 {checkedGenres.length > 0 || searchParams.get('genre') ? (
                     <Button onClick={handleClear}>Clear</Button>
                 ) : (
@@ -78,7 +80,8 @@ export default function Filter(genre) {
                 )}
 
                 <Button variant="outlined" onClick={handleClickOpen} sx={{
-                    border: "none"
+                    border: "1px solid black",
+                    color:"black"
                 }}>
                     <FilterListIcon />Filter
                 </Button>
@@ -88,12 +91,15 @@ export default function Filter(genre) {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
+                sx={{
+                    marginTop:"70px"
+                }}
             >
                 <DialogTitle id="alert-dialog-title">
                     {"Filter"}
                 </DialogTitle>
                 <DialogContent sx={{
-                    maxWidth: "400px"
+                    maxWidth: "500px",
                 }}>
                     <DialogContentText id="alert-dialog-description">
                         <div className='genre-btns-div'>
