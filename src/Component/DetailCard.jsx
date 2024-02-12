@@ -44,6 +44,7 @@ export default function DetailCard({ data }) {
         };
         fetchTrailer();
     }, [id]);
+    
 
     const handleClickOpen = () => {
         setOpen(true);

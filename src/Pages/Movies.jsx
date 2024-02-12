@@ -46,10 +46,10 @@ export default function Movies() {
     } else {
       setSearchParams({ page: value })
     }
-    // setLoading(true);
-    // setTimeout(() => {
-    //   setLoading(false)
-    // }, 2000)
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false)
+    }, 10)
   }
 
   return (
