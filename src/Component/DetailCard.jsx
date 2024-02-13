@@ -49,7 +49,7 @@ export default function DetailCard({ data, toLink }) {
         };
         fetchTrailer();
         const storedIds = localStorage.getItem("ids");
-        if (storedIds) {
+        if (storedIds !== null) {
             const Ids = JSON.parse(storedIds);
             if (Ids.includes(data.id)) {
                 setWatchlist(true);
