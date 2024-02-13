@@ -48,7 +48,7 @@ export default function DetailCard({ data, toLink }) {
             }
         };
         fetchTrailer();
-        if (JSON.parse(localStorage.getItem("ids").includes(data.id))) {
+        if (JSON.parse(localStorage.getItem("ids")?.includes(data.id))) {
             setWatchlist(prev => !prev)
         }
     }, [id]);
@@ -70,7 +70,7 @@ export default function DetailCard({ data, toLink }) {
     const handleWatchListClick = (id) => {
         let Ids = []
         Ids = JSON.parse(localStorage.getItem("ids")) || [];
-        if (Ids.includes(id)) {
+        if (Ids?.includes(id)) {
             Ids = Ids.filter(itemId => itemId !== id)
         } else {
             setWatchlistAlertOpen(true);
