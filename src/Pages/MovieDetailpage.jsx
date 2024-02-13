@@ -6,7 +6,7 @@ import Loading from '../Component/Loading'
 
 export function loader({ params }) {
   return defer({
-    movie: getMovieById(params.id),
+    movie: getMovieById(params.id)
   })
 }
 

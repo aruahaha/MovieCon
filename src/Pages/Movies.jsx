@@ -73,11 +73,11 @@ export default function Movies() {
             sx={{
               '& .Mui-selected': {
                 backgroundColor: '#40A2D8',
-                borderRadius: "10px",
+                borderRadius: "5px",
                 fontSize: 20
               },
               '& .MuiPaginationItem-icon': {
-                fontSize: '1.8rem', // Adjusts the font size of the icons (left and right arrows)
+                fontSize: '1.8rem', 
               },
             }}
           />
