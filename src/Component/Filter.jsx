@@ -102,6 +102,7 @@ export default function Filter(genre) {
                     maxWidth: "500px",
                 }}>
                     <DialogContentText id="alert-dialog-description">
+                        <h1>Genres</h1>
                         <div className='genre-btns-div'>
                             {genre.data?.genres?.map((item) => (
                                 <div key={item.id} className='select-item'>
@@ -119,6 +120,7 @@ export default function Filter(genre) {
                                 </div>
                             ))}
                         </div>
+                        
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
