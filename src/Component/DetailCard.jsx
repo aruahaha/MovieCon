@@ -48,8 +48,12 @@ export default function DetailCard({ data, toLink }) {
             }
         };
         fetchTrailer();
-        if (JSON.parse(localStorage.getItem("ids")?.includes(data.id))) {
-            setWatchlist(prev => !prev)
+        const storedIds = localStorage.getItem("ids");
+        if (storedIds) {
+            const Ids = JSON.parse(storedIds);
+            if (Ids.includes(data.id)) {
+                setWatchlist(true);
+            }
         }
     }, [id]);
 
