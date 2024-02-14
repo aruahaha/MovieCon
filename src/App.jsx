@@ -6,7 +6,6 @@ import ErrorBoundary from "./Component/ErrorBoundary";
 
 import Layout from "./Component/Layout";
 import Home, { loader as HomePageLoader } from "./Pages/Home";
-
 import Movies ,{loader as MoviesPageLoader}from "./Pages/Movies";
 import TvShows , {loader as TvShowsPageloader}from "./Pages/TvShows";
 
@@ -15,7 +14,7 @@ import TvDetailpage, { loader as TvShowDetailPageLoader } from "./Pages/TvDetail
 
 import SearchPage from "./Pages/SearchPage";
 
-import WatchList from "./Pages/Watchlist";
+import WatchList,{loader as WatchlistLoader} from "./Pages/Watchlist";
 
 
 const router = createBrowserRouter(createRoutesFromElements(
@@ -26,7 +25,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/tvshows" element={<TvShows />} loader={TvShowsPageloader}/>
     <Route path="/movie/:id" element={<MovieDetailpage />} loader={MovieDetailPageLoader} errorElement={<ErrorBoundary/>}/>
     <Route path="/tv/:id" element={<TvDetailpage />} loader={TvShowDetailPageLoader} errorElement={<ErrorBoundary/>}/>
-    <Route path="/watchlist" element={<WatchList />} errorElement={<ErrorBoundary/>}/>
+    <Route path="/watchlist" element={<WatchList />} loader={WatchlistLoader} errorElement={<ErrorBoundary/>} />
   </Route>
 ));
 

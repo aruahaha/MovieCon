@@ -6,10 +6,11 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 export default function CardContainer({ data, toLink }) {
+
     return (
         <div>
             <div className='movies-div'>
-                {data?.results?.map((item, index) => (
+                {data?.map((item, index) => (
                     <Link to={item.media_type ? `/${item.media_type}/${item.id}` : toLink + item.id} style={{ textDecoration: "none" }} key={index}>
                         <div className='movies-content'>
                             <div className="card">

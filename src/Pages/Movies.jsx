@@ -60,7 +60,7 @@ export default function Movies() {
         <Await resolve={data.movies}>
           {(movies) => (
             <>
-              {loading ? <Loading /> : <CardContainer data={movies} toLink="/movie/" />}
+              {loading ? <Loading /> : <CardContainer data={movies.results} toLink="/movie/" />}
             </>
           )}
         </Await>

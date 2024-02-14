@@ -6,7 +6,7 @@ import Loading from '../Component/Loading'
 
 export function loader({ params }) {
   return defer({
-  tvshow: getTvShowById(params.id),
+  tvshow: getTvShowById(params.id)
   })
 }
 
@@ -18,7 +18,7 @@ export default function Detailpage() {
       <Suspense fallback={<Loading/>}>
         <Await resolve={tvshow?.tvshow}>
           {(tvshow) => (
-            <DetailCard data={tvshow} toLink="/tv/" />
+            <DetailCard data={tvshow} toLink="tv" />
           )}
         </Await>
       </Suspense>

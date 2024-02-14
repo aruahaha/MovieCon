@@ -85,21 +85,34 @@ export async function getMovieById(id) {
 
 
 
-
-
 export async function getTvShowById(id) {
 
     const url = `https://api.themoviedb.org/3/tv/${id}?language=en-US&api_key=${import.meta.env.VITE_API_KEY}`;
+    const creditsUrl = `https://api.themoviedb.org/3/tv/${id}/credits?language=en-US&api_key=${import.meta.env.VITE_API_KEY}`;
 
     try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+        const tvshowResponse = await fetch(url);
+        if (!tvshowResponse.ok) {
+            throw new Error(`HTTP error! Status: ${tvshowResponse.status}`);
         }
-        const data = await response.json();
-        return data;
+        const tvshowData = await tvshowResponse.json();
+
+
+        const creditsResponse = await fetch(creditsUrl);
+        if (!creditsResponse.ok) {
+            throw new Error(`HTTP error! Status: ${creditsResponse.status}`);
+        }
+        const creditsData = await creditsResponse.json();
+
+
+        const tvshowWithCredits = {
+            ...tvshowData,
+            credits: creditsData
+        };
+
+        return tvshowWithCredits;
     } catch (error) {
-        console.error('Error fetching movie:', error);
+        console.error('Error fetching tv show:', error);
         throw error;
     }
 
@@ -107,7 +120,7 @@ export async function getTvShowById(id) {
 
 
 export async function getTrailers(id,type) {
-    const url = `https://api.themoviedb.org/3${type}${id}/videos?api_key=${import.meta.env.VITE_API_KEY}&language=en-US`;
+    const url = `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${import.meta.env.VITE_API_KEY}&language=en-US`;
     try {
         const response = await fetch(url);
 
@@ -209,38 +222,36 @@ export async function getTvshowsByGenre(genreid,page) {
     }
 }
 
+export async function getMovieListDetails(ids) {
+    if(!ids) {
+        return
+    }
+    const urls = ids?.map(id => `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_API_KEY}`);
+    try {
+        const responses = await Promise.all(urls?.map(url => fetch(url)));
+        const moviesData = await Promise.all(responses?.map(res => res.json()));
+        // console.log(moviesData);
+        return moviesData;
+    } catch (error) {
+        throw error;
+    }
+}
 
+export async function getTvListDetails(ids) {
+    if(!ids) {
+        return
+    }
+    const urls = ids?.map(id => `https://api.themoviedb.org/3/tv/${id}?api_key=${import.meta.env.VITE_API_KEY}`);
+    try {
+        const responses = await Promise.all(urls?.map(url => fetch(url)));
+        const tvData = await Promise.all(responses?.map(res => res.json()));
+        // console.log(tvData);
+        return tvData;
+    } catch (error) {
+        throw error;
+    }
+}
 
-
-
-// export async function postWatchlist(movieId) {
-//     const url = `https://api.themoviedb.org/3/account/20955904/watchlist?api_key=${import.meta.env.VITE_API_KEY}`;
-//     const options = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MzM5ZjNjOWY0ZTg1NTM2MjRmZjNmN2YzOWE0M2Q4ZiIsInN1YiI6IjY1YjhkNWFmNDZlNzVmMDE4M2JiNmJiOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eALEQTXSdrHEG8WbyhGz2oegp9QQMUkrPnvLCFO50Ug'
-//         },
-//         body: JSON.stringify({
-//             media_type: 'movie',
-//             media_id: movieId,
-//             watchlist: true
-//         })
-//     };
-
-//     try {
-//         const response = await fetch(url, options);
-
-//         if (!response.ok) {
-//             throw new Error(`Failed to add movie to watchlist. HTTP error! Status: ${response.status}`);
-//         }
-
-//         const data = await response.json();
-//         return data;
-//     } catch (error) {
-//         throw new Error(`Error in postWatchlist: ${error.message}`);
-//     }
-// }
 
 
 

@@ -12,6 +12,8 @@ import "./DetailCard.css";
 import myImage from "/assets/images/no-image.png";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 const stylesAboveSeventy = {
     textColor: "#fff",
@@ -30,8 +32,6 @@ const stylesRemaining = {
 };
 
 export default function DetailCard({ data, toLink }) {
-    console.log(data)
-
     const { id } = useParams();
     const [trailer, setTrailer] = useState(null);
     const [watchlist, setWatchlist] = useState(false)
@@ -48,11 +48,22 @@ export default function DetailCard({ data, toLink }) {
             }
         };
         fetchTrailer();
-        const storedIds = localStorage.getItem("ids");
-        if (storedIds !== null) {
-            const Ids = JSON.parse(storedIds);
-            if (Ids.includes(data.id)) {
-                setWatchlist(true);
+
+        if (toLink === "movie") {
+            const storedIds = localStorage.getItem("movieIds");
+            if (storedIds !== null) {
+                const movieIds = JSON.parse(storedIds);
+                if (movieIds.includes(data.id)) {
+                    setWatchlist(true);
+                }
+            }
+        } else if (toLink === "tv") {
+            const storedIds = localStorage.getItem("tvIds");
+            if (storedIds !== null) {
+                const tvIds = JSON.parse(storedIds);
+                if (tvIds.includes(data.id)) {
+                    setWatchlist(true);
+                }
             }
         }
     }, [id]);
@@ -72,19 +83,40 @@ export default function DetailCard({ data, toLink }) {
 
 
     const handleWatchListClick = (id) => {
-        let Ids = []
-        Ids = JSON.parse(localStorage.getItem("ids")) || [];
-        if (Ids?.includes(id)) {
-            Ids = Ids.filter(itemId => itemId !== id)
-        } else {
-            setWatchlistAlertOpen(true);
-            setTimeout(() => {
-                setWatchlistAlertOpen(false);
-            }, 2000);
-            Ids.push(id)
+        let movieIds = []
+        let tvIds = []
+
+        if (toLink === "movie") {
+            movieIds = JSON.parse(localStorage.getItem("movieIds")) || [];
+            if (movieIds?.includes(id)) {
+                movieIds = movieIds.filter(itemId => itemId !== id)
+            } else {
+                setWatchlistAlertOpen(true);
+                setTimeout(() => {
+                    setWatchlistAlertOpen(false);
+                }, 2000);
+                movieIds.push(id)
+            }
+
+            localStorage.setItem("movieIds", JSON.stringify(movieIds))
+
+        } else if (toLink === "tv") {
+            tvIds = JSON.parse(localStorage.getItem("tvIds")) || [];
+            if (tvIds?.includes(id)) {
+                tvIds = tvIds.filter(itemId => itemId !== id)
+            } else {
+                setWatchlistAlertOpen(true);
+                setTimeout(() => {
+                    setWatchlistAlertOpen(false);
+                }, 2000);
+                tvIds.push(id)
+            }
+
+            localStorage.setItem("tvIds", JSON.stringify(tvIds))
+
         }
+
         setWatchlist(prev => !prev)
-        localStorage.setItem("ids", JSON.stringify(Ids))
     };
 
 
@@ -104,6 +136,20 @@ export default function DetailCard({ data, toLink }) {
 
     return (
         <>
+            <Alert severity="success" sx={{
+                display: watchlistAlertOpen ? "flex" : "none",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                position: "absolute",
+                right: 0,
+                padding: "20px",
+                zIndex: 9999,
+                fontSize: 20
+            }}>
+
+                Added in watchlist
+            </Alert>
             <div className='phone-main-div'>
                 <LazyLoadImage
                     effect='blur'
@@ -116,13 +162,13 @@ export default function DetailCard({ data, toLink }) {
                 <div className='content'>
                     <div className='name-div'>
                         <h1 className='content-title'>
-                            {data.original_name ? data.original_title || data.original_name : data.title}
+                            {data.original_name ? data.name : data.title}
                         </h1>
                         <span>{data.tagline}</span>
                     </div>
                     <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap", paddingInline: "10px" }}>
-                        {data.genres.map((item) => (
-                            <p className='genres'>{item.name}</p>
+                        {data.genres.map((item, index) => (
+                            <p className='genres' key={index}>{item.name}</p>
                         ))}
                     </div>
                     <div className='percent-trailer'>
@@ -131,6 +177,11 @@ export default function DetailCard({ data, toLink }) {
                             Users Score
                         </div>
                         <Link style={{ textDecoration: "none", color: "white" }} to={`https://www.youtube.com/watch?v=${filteredTrailers[0]?.key}`}>Trailer <PlayArrowIcon /></Link>
+                        {watchlist ?
+                            <button onClick={() => handleWatchListClick(data.id)} className='watchlist-btn'><BookmarkIcon /></button>
+                            :
+                            <button onClick={() => handleWatchListClick(data.id)} className="watchlist-btn"><BookmarkBorderIcon /></button>
+                        }
                     </div>
                     <div className='info-div'>
                         <div>
@@ -165,21 +216,6 @@ export default function DetailCard({ data, toLink }) {
             </div>
 
             <div className='main-div'>
-                <Alert severity="success" sx={{
-                    display: watchlistAlertOpen ? "flex" : "none",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    position: "absolute",
-                    right: 0,
-                    padding: "20px",
-                    zIndex: 9999,
-                    fontSize: 20
-                }}>
-
-                    Added in watchlist
-                </Alert>
-
                 <img
                     src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} className='bg-img'
                 />
@@ -197,8 +233,8 @@ export default function DetailCard({ data, toLink }) {
                                 <span>{data.tagline}</span>
                             </div>
                             <div className='genre-div'>
-                                {data.genres.map((item) => (
-                                    <p className='genres'>{item.name}</p>
+                                {data.genres.map((item, index) => (
+                                    <p className='genres' key={index}>{item.name}</p>
                                 ))}
                             </div>
                             <div className='info-div'>
@@ -284,8 +320,8 @@ export default function DetailCard({ data, toLink }) {
                             <h1 className="cast-title">Cast</h1>
                         </div>
                         <div className="cast-div">
-                            {data?.credits?.cast.map((item) => (
-                                <div className='cast-img-name' key={item.id}>
+                            {data?.credits?.cast.map((item, index) => (
+                                <div className='cast-img-name' key={index}>
                                     {item.profile_path ?
                                         <LazyLoadImage
                                             effect='blur'
