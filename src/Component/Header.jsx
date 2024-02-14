@@ -31,6 +31,9 @@ export default function Header() {
           <li>
             <NavLink to="/tvshows?page=1">TV Shows</NavLink>
           </li>
+          <li>
+            <NavLink to="/watchlist">Watchlist</NavLink>
+          </li>
           <Searchbar/>
         </ul>
       </div>
@@ -78,6 +81,14 @@ export default function Header() {
               to="/tvshows?page=1"
             >
               TV Shows
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              onClick={() => setMenuClass("mob-header-menu")}
+              to="/watchlist"
+            >
+              Watchlist
             </NavLink>
           </li>
         </ul>

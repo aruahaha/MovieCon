@@ -59,7 +59,7 @@ export default function TvShows() {
         </Await>
         <Await resolve={data.tvshows}>
           {(item) => (
-            <CardContainer data={item} toLink="/tv/" />
+            <CardContainer data={item.results} toLink="/tv/" />
           )}
         </Await>
         <div style={{ display: "flex", justifyContent: "center", marginBottom: "50px" }}>

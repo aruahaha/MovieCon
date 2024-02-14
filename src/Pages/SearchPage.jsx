@@ -30,7 +30,7 @@ export default function SearchPage() {
                 </div>
             </div>
             <div>
-                <CardContainer data={searchResults} />
+                <CardContainer data={searchResults?.results} />
             </div>
         </>
     )

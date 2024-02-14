@@ -45,7 +45,7 @@ const Card = memo(({ movie, toLink }) => {
                     <img src={myImage} className="popular-movie-image not-found-image" alt="No Image" />
                 )}
                 <span className='scroller-movie-name'>{movie.original_name ? movie.name : movie.title || movie.original_title}</span>
-                <button className="watchlist-btn"><BookmarkBorderIcon /></button>
+                {/* <button className="watchlist-btn"><BookmarkBorderIcon /></button> */}
                 <div className='scroller-percentage'>
                     <CircularProgressbar
                         value={voteAverage}

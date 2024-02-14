@@ -52,7 +52,7 @@
     font-weight: 500;
 }
 
-.watchlist-btn{
+/* .watchlist-btn{
     position: absolute;
     right: 0;
     top: 0;
@@ -62,7 +62,7 @@
     padding: 10px;
     border-radius: 10px;
     visibility: hidden;
-}
+} */
 
 .scroller-percentage{
     position: absolute;

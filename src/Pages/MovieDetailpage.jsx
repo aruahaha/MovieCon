@@ -4,7 +4,7 @@ import { getMovieById, getTrendingMovies } from '../api'
 import DetailCard from '../Component/DetailCard'
 import Loading from '../Component/Loading'
 
-export function loader({ params }) {
+export function loader({ params}) {
   return defer({
     movie: getMovieById(params.id)
   })
@@ -19,7 +19,7 @@ export default function Detailpage() {
         <Await resolve={movie?.movie}>
           {(movie) => (
             <>
-              <DetailCard data={movie} toLink="/movie/" />
+              <DetailCard data={movie} toLink="movie" />
             </>
           )}
         </Await>

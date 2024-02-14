@@ -306,4 +306,10 @@
         margin: 50px 30px 20px 20px;
     }
 
+    .watchlist-btn{
+        background: transparent;
+        border: none;
+        color: white;
+    }
+
 }
