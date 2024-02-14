@@ -272,8 +272,18 @@ export default function DetailCard({ data, toLink }) {
                                             onClose={handleClose}
                                             aria-labelledby="alert-dialog-title"
                                             aria-describedby="alert-dialog-description"
+                                            sx={{
+                                                maxWidth:"1500px"
+                                            }}
                                         >
-                                            <DialogContent>
+                                            <DialogContent 
+                                            sx={{
+                                                height:"800px",
+                                                width:"1500px",
+                                                padding:"0",
+                                                overflowY:"hidden"
+                                            }}
+                                            >
                                                 <iframe
                                                     src={`https://www.youtube.com/embed/${filteredTrailers.length > 0 ? filteredTrailers[filteredTrailers.length - 1].key : (filteredTrailers.length > 0 ? filteredTrailers[0].key : '')}`}
                                                     width="1500"
