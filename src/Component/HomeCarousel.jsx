@@ -44,7 +44,7 @@ export default function HomeCarousel(props) {
 
     useEffect(() => {
         const idArray = props.data.map((item) => item.id);
-        const trailersPromises = idArray.map((id) => getTrailers(id, props.toLink));
+        const trailersPromises = idArray.map((id) => getTrailers(id,props.toLink));
         Promise.all(trailersPromises)
             .then((trailers) => setTrailers(trailers))
             .catch((error) => console.error(error));
@@ -62,21 +62,21 @@ export default function HomeCarousel(props) {
                                     <div className='overlay-div'>
                                         <div className='phone-carousel-percentage-div'>
                                             <div className='phone-carousel-content-div'>
-                                                <Link to={props.toLink + movie.id}>
+                                                <Link to={props.toLink+movie.id}>
                                                     <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className="phone-carousel-poster-image" />
                                                 </Link>
                                                 <h1 className='phone-carousel-title movie-title'>
                                                     {movie.original_language.toLowerCase() === 'en' ? movie.original_title || movie.original_name : movie.title}
                                                 </h1>
                                                 <div className="phone-carousel-btn-div">
-                                                    {trailers?.[index]?.results && trailers[index].results.some(trailer => trailer.type === 'Trailer') && (
-                                                        <Link
-                                                            className='phone-carousel-more-btn play-btn'
-                                                            to={`https://www.youtube.com/watch?v=${trailers[index].results.find(trailer => trailer.type === 'Trailer').key}`}
-                                                        >
-                                                            Trailer<PlayArrowIcon />
-                                                        </Link>
-                                                    )}
+                                                {trailers?.[index]?.results && trailers[index].results.some(trailer => trailer.type === 'Trailer') && (
+                                                    <Link
+                                                        className='phone-carousel-more-btn play-btn'
+                                                        to={`https://www.youtube.com/watch?v=${trailers[index].results.find(trailer => trailer.type === 'Trailer').key}`}
+                                                    >
+                                                        Trailer<PlayArrowIcon />
+                                                    </Link>
+                                                )}
                                                 </div>
                                             </div>
 
@@ -161,7 +161,7 @@ export default function HomeCarousel(props) {
                                                 </div>
                                             </div>
                                             <div className='carousel-btns'>
-                                                <Link to={props.toLink + movie.id} className='carousel-more-btn'>View More</Link>
+                                                <Link to={props.toLink+movie.id} className='carousel-more-btn'>View More</Link>
                                                 {trailers?.[index]?.results && trailers[index].results.some(trailer => trailer.type === 'Trailer') && (
                                                     <>
                                                         <Link
@@ -172,23 +172,12 @@ export default function HomeCarousel(props) {
                                                             Trailer<PlayArrowIcon />
                                                         </Link>
                                                         <Dialog
-                                                            open={open}
+                                                            open={selectedIndex === index}
                                                             onClose={handleClose}
                                                             aria-labelledby="alert-dialog-title"
                                                             aria-describedby="alert-dialog-description"
-                                                            sx={{
-                                                                maxWidth: "1500px"
-                                                            }}
                                                         >
-                                                            <DialogContent
-                                                                sx={{
-                                                                    height: "800px",
-                                                                    width: "1500px",
-                                                                    padding: "0",
-                                                                    overflowY: "hidden"
-                                                                }}
-                                                                className='youtube-video'
-                                                            >
+                                                            <DialogContent className='youtube-video'>
                                                                 <iframe
                                                                     src={`https://www.youtube.com/embed/${trailers[index].results.find(trailer => trailer.type === 'Trailer').key}`}
                                                                     width="1500"
