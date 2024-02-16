@@ -46,7 +46,7 @@ export default function Movies() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 10);
+    }, 1000);
   }
 
   return (
